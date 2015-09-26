@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>WordPress &#8250; OlvasdEl</title>
+	<link rel="stylesheet" href="wp-admin/css/install.css?ver=20100228" type="text/css" />
+</head>
+<body>
+<h1 id="logo">
+	<a href="https://wordpress.org/"><img alt="WordPress" src="wp-admin/images/wordpress-logo.png" /></a>
+	<br /> Version 4.3
+</h1>
+<p style="text-align: center">Szemantikus Személyes Publikációs Platform</p>
+
+<h1>Mindenek előtt</h1>
+<p>Üdvözöllek. A WordPress egy különleges projekt a számomra. Minden fejlesztő és közreműködő valami egyedit ad hozzá a keverékhez, és végül ebből valami olyan csodát alkotunk, amire büszke vagyok, hogy a része lehetek. Sok ezer munka óra került már bele, és elkötelezettek vagyunk, hogy ezt jobbá tegyük nap, mint nap. Köszönöm, hogy mostantól a te világodnak is a részét képezi.</p>
+<p style="text-align: right;">&#8212; Matt Mullenweg</p>
+
+<h1>Telepítés: A híres 5 perces telepítő</h1>
+<ol>
+	<li>Tömörítsd ki a csomagot egy üres könyvtárba.</li>
+	<li>Nyissuk meg <span class="file"><a href="wp-admin/install.php">wp-admin/install.php</a></span> a kedvenc böngészőnkben. Ez az oldal végig fog kalauzolni minket a <code>wp-config.php</code> fájlhoz szükséges adatbázis beállításain.
+  <ol>
+			<li>Ha valamilyen okból ez nem működik, aggodalomra semmi ok, nem működik minden tárhely szolgáltatónál. Nyissuk meg a <code>wp-config-sample.php</code> nevű fájlt a kedvenc szerkesztőnkkel, mint a WordPad, PSPaddal vagy hasonlóval, és töltsd ki az adatbázissal kapcsolatos részeket.</li>
+	    <li>Mentssük el a fájlt, <code>wp-config.php</code> néven és tültsük fel a tárhelyünkre.</li>
+    	<li>Nyisd meg a <span class="file"><a href="wp-admin/install.php">/wp-admin/install.php</a></span> fájlt a böngésződben.</li> 
+	</ol>
+
+  <li>Amit a beállítások elkészültek, a telepítő beállítja azokat az adatbázis táblákat, amire szüksége lesz a blogodnak. Ha bármilyen hibát tapasztalunk, mégegyszer ellenőrizzük le a <span class="file">wp-config.php</span> fájlt, és próbáljuk meg újra. Ha megint nem sikerül, látogassunk el <a href="http://wphu.org">Fórumra</a> és adjunk meg annyi technikai adatot a telepítéssel kapcsolatban, amennyit csak össze lehet gyűjteni. Minél több technikai információ áll rendelkezésre, annál könnyebb a közösségünk tagjainak megtalálni a hibát a telepítésben.</li>
+
+	<li><strong>Ha nem adtunk meg jelszót, akkor automatikusan generálódik egy a számunka.</strong> Ha nem adtunk meg felhasználónevet, akkor ez <code>admin</code> lesz.</li>
+	<li> A telepítő ezután a <a href="wp-login.php">bejelentkeztő oldal</a>ra fog vinni. Lépj be az <code>admin</code> felhasználó névvel és a jelszóval, amit a telepítés közben generált. Ezután kattints a 'Profil' linkre a jelszó megváltoztatásához.</li>
+</ol>
+
+<h1>Frissítés</h1>
+
+<h2>Automatikus frissítés használata</h2>
+<p>Ha 2.7 vagy újabb verziót használunk, lehetőségünk van automatikus frissítésre:</p>
+<ol>
+	<li>Nyissuk meg a <span class="file"><a href="wp-admin/update-core.php">wp-admin/update-core.php</a></span> a böngészőnkben és kövessük az instrukciókat.</li>
+	<li>Több lépést szerettél volna? Pedig, csak ennyi!</li>
+</ol>
+
+<p>Frissítés előtt, győződj meg róla, hogy minden olyan állományodról készítettél biztonsági mentést, amit módosítottál, mint pl. <code>index.php</code>.</p>
+<h2>Frissítés bármelyik korábbi verzióról WordPress 4.3-ra:</h2>
+<ol>
+	<li>Töröld a régi WP fájlokat, de mentsd el azokat amiket módosítottál.</li>
+	<li>Töltsd fel az új fájlokat.</li>
+	<li>Nyisd meg a böngésződdel a <span class="file"><a href="wp-admin/upgrade.php">/wp-admin/upgrade.php</a> szkriptet.</span></li>
+	<li>Többet szerettél volt? Ennyi volt!</li>
+</ol>
+
+<h1>Költözés más rendszerekről</h1>
+<p>WordPress képes <a href="http://codex.wordpress.org/Importing_Content">számos rendszerből importálásra</a>. Először fel kell telepítenünk egy WordPress-t, és beállítani a fent leírtak szerint, majd használjuk <a href="wp-admin/import.php" title="Import to WordPress">az importáló eszközöket</a>.</p>
+
+<h1>Rendszer követelmények</h1>
+<ul>
+	<li><a href="http://php.net/">PHP</a> verzió <strong>5.2.4</strong> vagy újabb.</li>
+	<li><a href="http://www.mysql.com/">MySQL</a> verzió <strong>5.0</strong> vagy újabb.</li>
+	<li>A <a href="http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html">mod_rewrite</a> Apache modul.</li>
+	<li>Egy link a <a href="http://wordpress.org/">http://wordpress.org</a>-ra az oldalunkról.</li>
+</ul>
+
+<h1>Online források</h1>
+<p>Ha bármilyen kérdésed merül fel, amire ebben a dokumentumban nem talátál választ, kérlek látogasd meg a WordPress számtalan online elérhető forrását:</p>
+<dl>
+	<dt><a href="http://wphu.org">WordPress Magyarország</a></dt>
+		<dd>A magyar WordPress közösség információs, és támogató oldala.</dd>
+	<dt><a href="http://dokumentacio.word-press.hu/">WordPress magyar nyelvű dokumentáció</a></dt>
+		<dd>A magyar nyelvű leírások és útmutatók.</dd>
+
+	<dt><a href="http://kozosseg.wphu.org/">Magyar WordPress Közösség</a></dt>
+		<dd>Kérdések, válaszok, témák, segítség, és minden ilyesmi.</dd>
+
+	<dt><a href="http://sugo.wphu.org/">Magyar WordPress Súgó</a></dt>
+		<dd>Leírások és magyarázatok</dd>    
+    
+
+	<dt><a href="http://codex.wordpress.org/">A WordPress Codex </a></dt>
+		<dd>A Codex a WordPress enciklopédiája, mindenről ami vele kapcsolatos. Ez a legátfogóbb angol nyevű információs forrás.</dd>
+	<dt><a href="http://wordpress.org/development/">Fejlesztői blog</a></dt>
+		<dd>Itt megtalálod a legutóbbi frissítéseket és a WordPressel kapcsolatos híreket. Tedd könyvjelzők közé, és látogasd gyarkran.</dd>
+	<dt><a href="http://planet.wordpress.org/">WordPress Planet </a></dt>
+		<dd>A WordPress Planet egy hír gyűjtő oldal, ahol megjelenik minden információ a WordPressel kapcsolatos blogokból, az egész világról.</dd>
+	<dt><a href="http://wordpress.org/support/">WordPress Support Forum</a></dt>
+		<dd>Ha már mindent átnéztél, és nem találod a választ, látogass el az nemzetközi támogató fórumra, ami nagyon aktív, és hatalmas közösség áll mögötte, akik készen állnak segíteni. Ahhoz, hogy segíteni tudjanak neked használj beszédes leírást a címben és fejtsd ki a kérdésed olyan részletesen ahogyan csak lehetséges.</dd>
+	<dt><a href="http://codex.wordpress.org/IRC">WordPress IRC Csatorna</a></dt>
+		<dd>Végül, van egy online csevegő csatornánk, ami a WordPress-t használó emberek közötti beszélgetések és a segítség nyújtás helye. A fenti wiki oldal, a megfeleső helyre fog vinni téged. (<a href="irc://irc.freenode.net/wordpress">irc.freenode.net #wordpress</a>)</dd>
+</dl>
+
+
+<h1>Zárszó</h1>
+<ul>
+	<li>Ha bármilyen kérdésed, ötleted, javaslatod, megjegyzésed van, vagy (huhh!) találtál egy hibát, látogasd meg a <a href="http://forum.wpm.hu">Fórumunkat</a>.</li>
+	<li>A WordPress robosztus bővítmény API-val rendelkezdik, ami könnyűvé teszi a kód kiterjesztését. Ha fejlesztő vagy és érdekel ennek a mikéntje nézd meg a <a href="http://codex.wordpress.org/Plugin_API">bővítmény dokumentációt</a> a Codexben. Az esetek döntő többségében semmit sem kellen változtatnod az alap kódon.</li>
+</ul>
+
+<h1>Oszd meg a szeretetet</h1>
+<p>WordPress-nek nincs sok száz milliós marketing kampánya, nem szponzorálják hírességek, de van valami, ami ennél sokkal jobb lehet: Te. Ha örömöd leled abban, hogy a WordPress-t használod, beszélj a barátaidnak róla. Segíts olyanoknak a beállításban, akik kevésbé értenek hozzá, vagy írj egy áttekintő cikket a WordPressről és küld el valamilyen médium szerkesztőjének.</p>
+
+<p>WordPress a hivatalos folytatása a <a href="http://cafelog.com/">b2/caf&eacute;log</a>-nak, amit eredetileg Michel V készített. A munkát a <a href="http://wordpress.org/about/">WordPress fejlesztők</a> folytatták. Ha szeretnéd támogatni a WordPress-t, kérlek fontold meg az <a href="http://wordpress.org/donate/">adományozást</a>.</p>
+
+<h1>Szerzői jogok</h1>
+<p>WordPress <abbr title="GNU Public License">GPL</abbr> licenszeléssel jelent meg (nézd meg a <a href="licence.txt">licenc.txt</a>-t).</p>
+
+</body>
+</html>
