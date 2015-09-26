@@ -1,0 +1,714 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Fifteen WordPress Theme\n"
+"POT-Creation-Date: 2014-05-13 18:14+0530\n"
+"PO-Revision-Date: 2014-05-13 18:14+0530\n"
+"Last-Translator: Rohit Tripathi <rohit@rohitink.com>\n"
+"Language-Team: InkHive <rohit@rohitink.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.4\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;esc_attr_e;esc_attr_x;"
+"_ex\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /Users/mac/Documents/Developer/Theme-Development/wp-"
+"content/themes/fifteen\n"
+"X-Poedit-SearchPath-1: /Users/mac/Documents/Developer/Theme-Development/wp-"
+"content/themes/fifteen\n"
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/404.php:15
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/404.php:19
+msgid ""
+"It looks like nothing was found at this location. Maybe try one of the links "
+"below or a search?"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/404.php:27
+msgid "Most Used Categories"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/404.php:44
+#, php-format
+msgid "Try looking in the monthly archives. %1$s"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/archive.php:24
+#, php-format
+msgid "Author: %s"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/archive.php:32
+#, php-format
+msgid "Day: %s"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/archive.php:35
+#, php-format
+msgid "Month: %s"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/archive.php:38
+#, php-format
+msgid "Year: %s"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/archive.php:41
+msgid "Asides"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/archive.php:44
+msgid "Images"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/archive.php:47
+msgid "Videos"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/archive.php:50
+msgid "Quotes"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/archive.php:53
+msgid "Links"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/archive.php:56
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/sidebar.php:17
+msgid "Archives"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/comments.php:36
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/comments.php:56
+msgid "Comment navigation"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/comments.php:37
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/comments.php:57
+msgid "&larr; Older Comments"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/comments.php:38
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/comments.php:58
+msgid "Newer Comments &rarr;"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/comments.php:68
+msgid "Comments are closed."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/comments.php:89
+msgid "Name"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/comments.php:95
+msgid "Email"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/comments.php:102
+msgid "Website"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/content-home.php:22
+msgid "Read More"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/content-page.php:15
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/content-single.php:29
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/image.php:58
+msgid "Pages:"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/content-page.php:20
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/content-single.php:69
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/image.php:32
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/image.php:64
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/template-tags.php:71
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/template-tags.php:89
+msgid "Edit"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/content-search.php:42
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/content.php:36
+msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/content-search.php:45
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/content.php:39
+msgid "Pages: "
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/content-single.php:38
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/content-single.php:41
+msgid ", "
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/content-single.php:46
+#, php-format
+msgid ""
+"This entry was tagged %2$s. Bookmark the <a href=\"%3$s\" rel=\"bookmark"
+"\">permalink</a>."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/content-single.php:48
+#, php-format
+msgid "Bookmark the <a href=\"%3$s\" rel=\"bookmark\">permalink</a>."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/content-single.php:54
+#, php-format
+msgid ""
+"This entry was posted in %1$s and tagged %2$s. Bookmark the <a href=\"%3$s\" "
+"rel=\"bookmark\">permalink</a>."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/content-single.php:56
+#, php-format
+msgid ""
+"This entry was posted in %1$s. Bookmark the <a href=\"%3$s\" rel=\"bookmark"
+"\">permalink</a>."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/footer.php:18
+#, php-format
+msgid "Fifteen Theme by %1$s."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/functions.php:33
+msgid "Primary Menu"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/functions.php:34
+msgid "Top Menu"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/functions.php:49
+msgid "Primary Sidebar"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/functions.php:50
+msgid "This is the Primary Sidebar. It will be displayed on Posts Pages."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/functions.php:58
+msgid "Footer Left"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/functions.php:66
+msgid "Footer Center"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/functions.php:74
+msgid "Footer Right"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/header-single.php:66
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/header.php:65
+msgid "Menu"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/header-single.php:67
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/header.php:66
+msgid "Skip to content"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/image.php:22
+#, php-format
+msgid ""
+"Published <span class=\"entry-date\"><time class=\"entry-date\" datetime="
+"\"%1$s\">%2$s</time></span> at <a href=\"%3$s\">%4$s &times; %5$s</a> in <a "
+"href=\"%6$s\" rel=\"gallery\">%7$s</a>"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/image.php:37
+msgid "<span class=\"meta-nav\">&larr;</span> Previous"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/image.php:38
+msgid "Next <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/customizer.php:26
+msgid "Site Title Color"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/customizer.php:39
+msgid "Site Description Color"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/customizer.php:52
+msgid "Primary Menu Color"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/extras.php:66
+#, php-format
+msgid "Page %s"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-framework.php:147
+msgid "Fifteen Theme Options"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-framework.php:148
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-framework.php:377
+msgid "Fifteen Settings"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-framework.php:193
+msgid "Clear"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-framework.php:194
+msgid "Default"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-framework.php:195
+msgid "Select Color"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-framework.php:240
+msgid "Save Options"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-framework.php:241
+msgid "Restore Defaults"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-framework.php:241
+msgid "Click OK to reset. Any theme settings will be lost!"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-framework.php:273
+msgid "Default options restored."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-framework.php:327
+msgid "Options saved."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-media-uploader.php:51
+msgid "No file chosen"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-media-uploader.php:54
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-media-uploader.php:113
+msgid "Upload"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-media-uploader.php:56
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-media-uploader.php:114
+msgid "Remove"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-media-uploader.php:59
+msgid "Upgrade your version of WordPress for full media support."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-media-uploader.php:83
+msgid "View File"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:239
+msgid "No Repeat"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:240
+msgid "Repeat Horizontally"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:241
+msgid "Repeat Vertically"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:242
+msgid "Repeat All"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:255
+msgid "Top Left"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:256
+msgid "Top Center"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:257
+msgid "Top Right"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:258
+msgid "Middle Left"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:259
+msgid "Middle Center"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:260
+msgid "Middle Right"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:261
+msgid "Bottom Left"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:262
+msgid "Bottom Center"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:263
+msgid "Bottom Right"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:276
+msgid "Scroll Normally"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:277
+msgid "Fixed in Place"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:351
+msgid "Normal"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:352
+msgid "Italic"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:353
+msgid "Bold"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/options-sanitize.php:354
+msgid "Bold Italic"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/template-tags.php:34
+msgid "Post navigation"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/template-tags.php:44
+msgid "<span class=\"meta-nav\">&larr;</span> Older posts"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/template-tags.php:48
+msgid "Newer posts <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/template-tags.php:71
+msgid "Pingback:"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/template-tags.php:93
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/template-tags.php:183
+#, php-format
+msgid ""
+"<span class=\"posted-on\"><i class=\"fa fa-clock-o\"> </i> %1$s</span> <span "
+"class=\"byline\"> <i class=\"fa fa-user\"> </i> %2$s</span>"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/widgets.php:13
+msgid "Fifteen Recent Posts"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/widgets.php:14
+msgid "Display your recent posts, with a Thumbnail."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/widgets.php:84
+msgid "Latest Articles"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/widgets.php:90
+msgid "5"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/widgets.php:94
+msgid "Title:"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/inc/widgets.php:97
+msgid "No. of Posts:"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/no-results.php:13
+msgid "Nothing Found"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/no-results.php:19
+#, php-format
+msgid ""
+"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/no-results.php:23
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/no-results.php:28
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:33
+msgid "true"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:34
+msgid "false"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:40
+msgid "Basic Settings"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:44
+msgid "Site Logo"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:45
+msgid "Leave Blank to use text Heading."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:51
+msgid "Copyright Text"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:52
+msgid ""
+"Some Text regarding copyright of your site, you would like to display in the "
+"footer."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:58
+msgid "More Settings"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:59
+msgid ""
+"More Settings Like Analytics, Footer Codes, Header Codes, Responsive "
+"Navigation, etc are available in Fifteen plus. <a href=\"http://inkhive.com/"
+"product/fifteen-plus/\" target=\"_blank\">Upgrade to Pro at $24.90</a>."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:65
+msgid "Layout Settings"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:80
+msgid "Custom CSS"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:81
+msgid ""
+"Some Custom Styling for your site. Place any css codes here instead of the "
+"style.css file."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:87
+msgid "More Layout Options"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:88
+msgid ""
+"Fifteen Plus Supports a Featured Slider with over 16 Animation Effects and "
+"plenty of other configuration options. <a href=\"http://inkhive.com/product/"
+"fifteen-plus/\" target=\"_blank\">Upgrade to Pro at $24.90</a>."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:94
+msgid "Social Settings"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:98
+msgid "Facebook"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:99
+msgid "Facebook Profile or Page URL i.e. http://facebook.com/username/ "
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:106
+msgid "Twitter"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:107
+msgid "Twitter Username"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:114
+msgid "Google Plus"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:115
+msgid "Google Plus profile url, including \"http://\""
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:122
+msgid "Feeburner"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:123
+msgid "URL for your RSS Feeds"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:130
+msgid "Pinterest"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:131
+msgid "Your Pinterest Profile URL"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:138
+msgid "Instagram"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:139
+msgid "Your Instagram Profile URL"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:146
+msgid "Linked In"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:147
+msgid "Your Linked In Profile URL"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:154
+msgid "Youtube"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:155
+msgid "Your Youtube Channel URL"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:162
+msgid "Flickr"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:163
+msgid "Your Flickr Profile URL"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:170
+msgid "More Icons & Images"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:171
+msgid ""
+"For more Icons, Custom Icons and Choice of images - <a href=\"http://inkhive."
+"com/product/fifteen-plus/\" target=\"_blank\">Upgrade to Pro at $24.90</a>."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:175
+msgid "Support"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:179
+msgid ""
+"Fifteen WordPress theme has been Designed and Created by <a href=\"http://"
+"InkHive.com\" target=\"_blank\">InkHive</a>. For any Queries or help "
+"regarding this theme, <a href=\"http://wordpress.org/support/theme/fifteen/"
+"\" target=\"_blank\">use the WordPress support forums</a>."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:183
+msgid ""
+"<a href=\"http://twitter.com/rohitinked\" target=\"_blank\">Follow Me on "
+"Twitter</a> to know about my upcoming themes."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:187
+msgid "Dedicated Support"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:188
+msgid ""
+"We offer Dedicated and Fast e-mail Support only for Pro Version Customers. "
+"<a href=\"http://inkhive.com/product/fifteen-plus/\" target=\"_blank"
+"\">Upgrade to Pro at $24.90</a>."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:192
+msgid "Live Demo Blog"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:193
+msgid ""
+"For your convenience, we have created a <a href=\"http://demo.inkhive.com/"
+"fifteen/\" target=\"_blank\">Live Demo Blog of Fifteen</a>. You can take a "
+"look at and find out how your site would look once complete."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:197
+msgid "Regenerating Post Thumbnails"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:198
+msgid ""
+"If you are using Fifteen Theme on a New Wordpress Installation, then you can "
+"skip this section.<br />But if you have just switched to this theme from "
+"some other theme, then you are requested regenerate all the post thumbnails. "
+"It will fix all the issues you are facing with distorted & ugly homepage "
+"thumbnail Images. "
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:202
+msgid ""
+"To Regenerate all Thumbnail images, Install and Activate the <a href="
+"\"http://wordpress.org/plugins/regenerate-thumbnails/\" target=\"_blank"
+"\">Regenerate Thumbnails</a> WP Plugin. Then from <strong>Tools &gt; Regen. "
+"Thumbnails</strong>, re-create thumbnails for all your existing images. And "
+"your blog will look even more stylish with Fifteen theme.<br /> "
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:206
+msgid ""
+"<strong>Note:</strong> Regenerating the thumbnails, will not affect your "
+"original images. It will just generate a separate image file for those "
+"images."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:210
+msgid "Theme Credits"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/options.php:211
+msgid "Check this if you do not want to give us credit in your site footer."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/search.php:10
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/searchform-top.php:11
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/searchform.php:11
+msgid "Search for:"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/searchform-top.php:12
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/searchform.php:12
+msgid "Search for anything on this site..."
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/searchform-top.php:15
+msgid "Cancel"
+msgstr ""
+
+#: /Users/mac/Documents/Developer/Theme-Development/wp-content/themes/fifteen/sidebar.php:24
+msgid "Meta"
+msgstr ""

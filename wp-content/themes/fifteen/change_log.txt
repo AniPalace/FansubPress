@@ -1,0 +1,38 @@
+Version 1.0.0.1
+
+	i) Initial Release
+	
+Version 1.0.0.2
+
+	i) Added Pro Version Details.
+	ii) Minor CSS Fix	
+	
+Version 1.0.0.3
+
+	i) Minor Bug Fix, which was causing the scrollbar to appear on top search.
+	
+Version 1.0.0.4
+
+	i) [LANG] Added Missing Strings in .pot	
+	
+Version 1.0.0.5
+
+	i) [BUGFIX] Removed plugin territory dirname(__FILE__)	
+	
+Version 1.0.0.6
+
+	i) Fixed Issues with $content_width
+	ii) German Lang Added.
+	iii) Spanish Added.
+	iv) French Added.
+	
+Version 1.0.0.7
+
+	i) Added New Social Icons
+	ii) Major Changes to Look and Feel of the Theme.	
+	iii) Fixed Issues with Parallax Header with Smaller Images
+	
+Version 1.0.0.8
+
+	i) Removed Unused Social Icons Files.	
+	ii) Fixed Display of Bullets for Non WordPress Widgets.
