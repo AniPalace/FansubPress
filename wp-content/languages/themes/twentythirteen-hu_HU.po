@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Twenty Thirteen package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2015-03-26 21:06:22+0000\n"
+"PO-Revision-Date: 2015-07-27 22:21:23+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,193 +10,159 @@ msgstr ""
 "X-Generator: GlotPress/1.0-alpha-1100\n"
 "Project-Id-Version: Twenty Thirteen\n"
 
-#. Theme URI of the plugin/theme
-msgid "https://wordpress.org/themes/twentythirteen/"
-msgstr "https://wordpress.org/themes/twentythirteen/"
-
-#. #-#-#-#-#  twentythirteen.pot (Twenty Thirteen 1.6)  #-#-#-#-#
 #. Author URI of the plugin/theme
-#: footer.php:19
 msgid "https://wordpress.org/"
 msgstr "https://wordpress.org/"
 
-#. translators: %s: Name of current post
-#: content-aside.php:16 content-audio.php:27 content-chat.php:26
-#: content-gallery.php:27 content-image.php:26 content-link.php:27
-#: content-quote.php:16 content-status.php:16 content-video.php:26
-#: content.php:44 functions.php:478
-msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
-msgstr "%s  bővebben... <span class=\"meta-nav\">&rarr;</span>"
-
-#: 404.php:16
-msgid "Not Found"
-msgstr "Nincs találat"
+#. Author of the plugin/theme
+msgid "the WordPress team"
+msgstr "WordPress Magyarország Közösség"
 
 #. Description of the plugin/theme
 msgid "The 2013 theme for WordPress takes us back to the blog, featuring a full range of post formats, each displayed beautifully in their own unique way. Design details abound, starting with a vibrant color scheme and matching header images, beautiful typography and icons, and a flexible layout that looks great on any device, big or small."
 msgstr "A WordPress 2013 alapsablona ismét a blogolás irányába terel bennünket a bejegyzési formátumok teljességével, a csodálatos megjelenés egyedi lehetőségeivel. A megjelenés bővelkedik a gazdag részletekben, kezdve a vibráló színsémáktól a hozzáillő fejrész képekig, a csodálatos írásképtől az ikonokig. A rugalmas elrendezés lehetősége biztosítja a kiváló megjelenést bármilyen eszközön, legyen az egy okostelefon, vagy egy óriás képernyő."
 
-#: functions.php:233
-msgid "Appears in the footer section of the site."
-msgstr "A honlap lábrészében jelenik meg."
+#. Theme URI of the plugin/theme
+msgid "https://wordpress.org/themes/twentythirteen/"
+msgstr "https://wordpress.org/themes/twentythirteen/"
 
-#: image.php:38
-msgid "Link to full-size image"
-msgstr "Hivatkozás a teljes méretű képhez"
+#. Theme Name of the plugin/theme
+msgid "Twenty Thirteen"
+msgstr "Twenty Thirteen"
 
-#: functions.php:231
-msgid "Main Widget Area"
-msgstr "Elsődleges widget terület"
+#: taxonomy-post_format.php:23
+msgid "%s Archives"
+msgstr "%s archívum"
 
-#: functions.php:241
-msgid "Secondary Widget Area"
-msgstr "Másodlagos widget terület"
+#: tag.php:21
+msgid "Tag Archives: %s"
+msgstr "%s címkével jelölt bejegyzések"
 
-#: functions.php:243
-msgid "Appears on posts and pages in the sidebar."
-msgstr "A bejegyzések és oldalak oldalsávján jelenik meg."
+#: search.php:18
+msgid "Search Results for: %s"
+msgstr "%s kifejezésre történő keresés eredménye"
 
-#: image.php:39
-msgid "Full resolution"
-msgstr "Teljes felbontás"
+#: inc/custom-header.php:59
+msgctxt "header image description"
+msgid "Star"
+msgstr "Csillag"
+
+#: inc/custom-header.php:54
+msgctxt "header image description"
+msgid "Diamond"
+msgstr "Gyémánt"
+
+#: inc/custom-header.php:49
+msgctxt "header image description"
+msgid "Circle"
+msgstr "Kör"
 
 #: inc/back-compat.php:37 inc/back-compat.php:47 inc/back-compat.php:60
 msgid "Twenty Thirteen requires at least WordPress version 3.6. You are running version %s. Please upgrade and try again."
 msgstr "A Twenty Thirteen futásához legalább a WordPress 3.6-os verziója szükséges. A jelenleg futó verzió: %s. Frissítsük a WordPress-t a megfelelő verzióra."
 
-#: 404.php:21
-msgid "This is somewhat embarrassing, isn&rsquo;t it?"
-msgstr "Némileg kínos, nem?"
+#: image.php:52
+msgid "Next <span class=\"meta-nav\">&rarr;</span>"
+msgstr "Következő <span class=\"meta-nav\">&rarr;</span>"
 
-#: 404.php:22
-msgid "It looks like nothing was found at this location. Maybe try a search?"
-msgstr "Úgy tűnik, ezen a helyen nincs értékelhető találat. Talán egy újabb keresés segíthet."
+#: image.php:51
+msgid "<span class=\"meta-nav\">&larr;</span> Previous"
+msgstr "<span class=\"meta-nav\">&larr;</span> Előző"
 
-#: archive.php:29
-msgid "Daily Archives: %s"
-msgstr "%s napi bejegyzések"
+#: image.php:39
+msgid "Full resolution"
+msgstr "Teljes felbontás"
 
-#: archive.php:31
-msgid "Monthly Archives: %s"
-msgstr "%s havi bejegyzések"
+#: image.php:38
+msgid "Link to full-size image"
+msgstr "Hivatkozás a teljes méretű képhez"
 
-#: archive.php:31
-msgctxt "monthly archives date format"
-msgid "F Y"
-msgstr "Y. F"
+#: image.php:22
+msgid "<span class=\"attachment-meta\">Published on <time class=\"entry-date\" datetime=\"%1$s\">%2$s</time> in <a href=\"%3$s\" title=\"Return to %4$s\" rel=\"gallery\">%5$s</a></span>"
+msgstr "<span class=\"attachment-meta\">Közzétéve: <time class=\"entry-date\" datetime=\"%1$s\">%2$s</time> | Kategória: <a href=\"%3$s\" title=\" %4$s bejegyzéshez\" rel=\"gallery\">%5$s</a></span>"
 
-#: archive.php:33
-msgid "Yearly Archives: %s"
-msgstr "%s. év bejegyzései"
+#: header.php:44
+msgid "Skip to content"
+msgstr "Megszakítás"
 
-#: archive.php:33
-msgctxt "yearly archives date format"
-msgid "Y"
-msgstr "Y."
-
-#: archive.php:35
-msgid "Archives"
-msgstr "Archívum"
-
-#: author-bio.php:26
-msgid "About %s"
-msgstr "%s bemutatkozása"
-
-#: author-bio.php:30
-msgid "View all posts by %s <span class=\"meta-nav\">&rarr;</span>"
-msgstr "%s összes bejegyzése <span class=\"meta-nav\">&rarr;</span>"
-
-#: author.php:31
-msgid "All posts by %s"
-msgstr "%s összes bejegyzése"
-
-#: category.php:19
-msgid "Category Archives: %s"
-msgstr "%s kategória bejegyzései"
-
-#: comments.php:25
-msgctxt "comments title"
-msgid "One thought on &ldquo;%2$s&rdquo;"
-msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
-msgstr[0] "&ldquo;%2$s&rdquo; bejegyzéshez egy hozzászólás"
-msgstr[1] "&ldquo;%2$s&rdquo; bejegyzéshez %1$ hozzászólás"
-
-#: comments.php:45
-msgid "Comment navigation"
-msgstr "Hozzászólás navigáció"
-
-#: comments.php:46
-msgid "&larr; Older Comments"
-msgstr "&larr; Korábbi hozzászólás"
-
-#: comments.php:47
-msgid "Newer Comments &rarr;"
-msgstr "Újabb hozzászólás &rarr;"
-
-#: comments.php:52
-msgid "Comments are closed."
-msgstr "A hozzászólások jelenleg nem engedélyezettek ezen a részen."
-
-#: content-aside.php:20 content-audio.php:31 content-chat.php:30
-#: content-gallery.php:31 content-image.php:30 content-link.php:31
-#: content-quote.php:20 content-status.php:20 content-video.php:30
-#: content.php:48 image.php:70 page.php:35
-msgid "Pages:"
-msgstr "Oldal:"
-
-#: content-aside.php:27 content-aside.php:35 content-audio.php:38
-#: content-chat.php:36 content-gallery.php:46 content-image.php:42
-#: content-link.php:19 content-quote.php:32 content-status.php:26
-#: content-video.php:42 content.php:31 image.php:44 page.php:39
-msgid "Edit"
-msgstr "Szerkesztés"
+#: header.php:43
+msgid "Menu"
+msgstr "Menü"
 
 #: functions.php:369
 msgid "Permalink to %s"
 msgstr "%s bejegyzés közvetlen hivatkozása"
 
-#: content-gallery.php:43 content-image.php:39 content-quote.php:29
-#: content-video.php:39 content.php:56
-msgid "Leave a comment"
-msgstr "Hozzászólás"
+#: functions.php:363
+msgctxt "1: post format name. 2: date"
+msgid "%1$s on %2$s"
+msgstr "%1$s - %2$s"
 
-#: content-gallery.php:43 content-image.php:39 content-quote.php:29
-#: content-video.php:39 content.php:56
-msgid "One comment so far"
-msgstr "Egy hozzászólás"
+#: functions.php:343
+msgid "View all posts by %s"
+msgstr "%s összes bejegyzése"
 
-#: content-gallery.php:43 content-image.php:39 content-quote.php:29
-#: content-video.php:39 content.php:56
-msgid "View all % comments"
-msgstr "Az összes - % - hozzászólás"
+#. Translators: used between list items, there is a space after the comma.
+#: functions.php:328 functions.php:334
+msgid ", "
+msgstr ", "
 
-#: content-none.php:12
-msgid "Nothing Found"
-msgstr "Nincs megfelelő találat"
+#: functions.php:322
+msgid "Sticky"
+msgstr "Ragadós"
 
-#: content-none.php:18
-msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
-msgstr "Készen állunk az első bejegyzés közzétételére? <a href=\"%1$s\">Kezdőlépések</a>."
+#: functions.php:304
+msgctxt "Next post link"
+msgid "%title <span class=\"meta-nav\">&rarr;</span>"
+msgstr "%title <span class=\"meta-nav\">&rarr;</span>"
 
-#: content-none.php:22
-msgid "Sorry, but nothing matched your search terms. Please try again with different keywords."
-msgstr "Elnézést, a keresett feltételeknek megfelelő eredményt nem találtunk. Bizonyára, egy másik kifejezéssel történő keresés eredményre vezetne..."
+#: functions.php:303
+msgctxt "Previous post link"
+msgid "<span class=\"meta-nav\">&larr;</span> %title"
+msgstr "<span class=\"meta-nav\">&larr;</span> %title"
 
-#: content-none.php:27
-msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
-msgstr "Úgy tűnik, nem találtuk meg amit kerestünk. :) Talán, egy újabb keresés segíthetne..."
+#: functions.php:300
+msgid "Post navigation"
+msgstr "Bejegyzések navigációja"
 
-#: footer.php:19
-msgid "Semantic Personal Publishing Platform"
-msgstr "Szemantikus személyes közzétételi platform"
+#: functions.php:274
+msgid "Newer posts <span class=\"meta-nav\">&rarr;</span>"
+msgstr "Újabb bejegyzés <span class=\"meta-nav\">&rarr;</span>"
 
-#: footer.php:19
-msgid "Proudly powered by %s"
-msgstr "Köszönjük %s!"
+#: functions.php:270
+msgid "<span class=\"meta-nav\">&larr;</span> Older posts"
+msgstr "<span class=\"meta-nav\">&larr;</span> Korábbi bejegyzés"
 
-#: functions.php:97
-msgid "Navigation Menu"
-msgstr "Navigációs menü"
+#: functions.php:266
+msgid "Posts navigation"
+msgstr "Bejegyzések navigációja"
+
+#: functions.php:243
+msgid "Appears on posts and pages in the sidebar."
+msgstr "A bejegyzések és oldalak oldalsávján jelenik meg."
+
+#: functions.php:241
+msgid "Secondary Widget Area"
+msgstr "Másodlagos widget terület"
+
+#: functions.php:233
+msgid "Appears in the footer section of the site."
+msgstr "A honlap lábrészében jelenik meg."
+
+#: functions.php:231
+msgid "Main Widget Area"
+msgstr "Elsődleges widget terület"
+
+#: functions.php:218
+msgid "Page %s"
+msgstr "%s oldal"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Bitter, translate this to 'off'. Do not translate into your own language.
+#: functions.php:134
+msgctxt "Bitter font: on or off"
+msgid "on"
+msgstr "on"
 
 #. Translators: If there are characters in your language that are not supported
 #. by Source Sans Pro, translate this to 'off'. Do not translate into your own
@@ -206,112 +172,148 @@ msgctxt "Source Sans Pro font: on or off"
 msgid "on"
 msgstr "on"
 
-#. Translators: If there are characters in your language that are not supported
-#. by Bitter, translate this to 'off'. Do not translate into your own language.
-#: functions.php:134
-msgctxt "Bitter font: on or off"
-msgid "on"
-msgstr "on"
+#: functions.php:97
+msgid "Navigation Menu"
+msgstr "Navigációs menü"
 
-#: functions.php:218
-msgid "Page %s"
-msgstr "%s oldal"
+#: footer.php:19
+msgid "Proudly powered by %s"
+msgstr "Köszönjük %s!"
 
-#: functions.php:266
-msgid "Posts navigation"
-msgstr "Bejegyzések navigációja"
+#: footer.php:19
+msgid "Semantic Personal Publishing Platform"
+msgstr "Szemantikus személyes közzétételi platform"
 
-#: functions.php:270
-msgid "<span class=\"meta-nav\">&larr;</span> Older posts"
-msgstr "<span class=\"meta-nav\">&larr;</span> Korábbi bejegyzés"
+#: footer.php:19
+msgid "http://wordpress.org/"
+msgstr "http://wphu.org"
 
-#: functions.php:274
-msgid "Newer posts <span class=\"meta-nav\">&rarr;</span>"
-msgstr "Újabb bejegyzés <span class=\"meta-nav\">&rarr;</span>"
+#: content-none.php:27
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Úgy tűnik, nem találtuk meg amit kerestünk. :) Talán, egy újabb keresés segíthetne..."
 
-#: functions.php:300
-msgid "Post navigation"
-msgstr "Bejegyzések navigációja"
+#: content-none.php:22
+msgid "Sorry, but nothing matched your search terms. Please try again with different keywords."
+msgstr "Elnézést, a keresett feltételeknek megfelelő eredményt nem találtunk. Bizonyára, egy másik kifejezéssel történő keresés eredményre vezetne..."
 
-#: functions.php:303
-msgctxt "Previous post link"
-msgid "<span class=\"meta-nav\">&larr;</span> %title"
-msgstr "<span class=\"meta-nav\">&larr;</span> %title"
+#: content-none.php:18
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Készen állunk az első bejegyzés közzétételére? <a href=\"%1$s\">Kezdőlépések</a>."
 
-#: functions.php:304
-msgctxt "Next post link"
-msgid "%title <span class=\"meta-nav\">&rarr;</span>"
-msgstr "%title <span class=\"meta-nav\">&rarr;</span>"
+#: content-none.php:12
+msgid "Nothing Found"
+msgstr "Nincs megfelelő találat"
 
-#: functions.php:322
-msgid "Sticky"
-msgstr "Ragadós"
+#: content-gallery.php:43 content-image.php:39 content-quote.php:29
+#: content-video.php:39 content.php:56
+msgid "View all % comments"
+msgstr "Az összes - % - hozzászólás"
 
-#. Translators: used between list items, there is a space after the comma.
-#: functions.php:328 functions.php:334
-msgid ", "
-msgstr ", "
+#: content-gallery.php:43 content-image.php:39 content-quote.php:29
+#: content-video.php:39 content.php:56
+msgid "One comment so far"
+msgstr "Egy hozzászólás"
 
-#: functions.php:343
-msgid "View all posts by %s"
+#: content-gallery.php:43 content-image.php:39 content-quote.php:29
+#: content-video.php:39 content.php:56
+msgid "Leave a comment"
+msgstr "Hozzászólás"
+
+#: content-aside.php:27 content-aside.php:35 content-audio.php:38
+#: content-chat.php:36 content-gallery.php:46 content-image.php:42
+#: content-link.php:19 content-quote.php:32 content-status.php:26
+#: content-video.php:42 content.php:31 image.php:44 page.php:39
+msgid "Edit"
+msgstr "Szerkesztés"
+
+#: content-aside.php:20 content-audio.php:31 content-chat.php:30
+#: content-gallery.php:31 content-image.php:30 content-link.php:31
+#: content-quote.php:20 content-status.php:20 content-video.php:30
+#: content.php:48 image.php:70 page.php:35
+msgid "Pages:"
+msgstr "Oldal:"
+
+#. translators: %s: Name of current post
+#: content-aside.php:16 content-audio.php:27 content-chat.php:26
+#: content-gallery.php:27 content-image.php:26 content-link.php:27
+#: content-quote.php:16 content-status.php:16 content-video.php:26
+#: content.php:44 functions.php:478
+msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr "%s  bővebben... <span class=\"meta-nav\">&rarr;</span>"
+
+#: comments.php:52
+msgid "Comments are closed."
+msgstr "A hozzászólások jelenleg nem engedélyezettek ezen a részen."
+
+#: comments.php:47
+msgid "Newer Comments &rarr;"
+msgstr "Újabb hozzászólás &rarr;"
+
+#: comments.php:46
+msgid "&larr; Older Comments"
+msgstr "&larr; Korábbi hozzászólás"
+
+#: comments.php:45
+msgid "Comment navigation"
+msgstr "Hozzászólás navigáció"
+
+#: comments.php:25
+msgctxt "comments title"
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "&ldquo;%2$s&rdquo; bejegyzéshez egy hozzászólás"
+msgstr[1] "&ldquo;%2$s&rdquo; bejegyzéshez %1$ hozzászólás"
+
+#: category.php:19
+msgid "Category Archives: %s"
+msgstr "%s kategória bejegyzései"
+
+#: author.php:31
+msgid "All posts by %s"
 msgstr "%s összes bejegyzése"
 
-#: functions.php:363
-msgctxt "1: post format name. 2: date"
-msgid "%1$s on %2$s"
-msgstr "%1$s - %2$s"
+#: author-bio.php:30
+msgid "View all posts by %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr "%s összes bejegyzése <span class=\"meta-nav\">&rarr;</span>"
 
-#: header.php:43
-msgid "Menu"
-msgstr "Menü"
+#: author-bio.php:26
+msgid "About %s"
+msgstr "%s bemutatkozása"
 
-#: header.php:44
-msgid "Skip to content"
-msgstr "Megszakítás"
+#: archive.php:35
+msgid "Archives"
+msgstr "Archívum"
 
-#: image.php:22
-msgid "<span class=\"attachment-meta\">Published on <time class=\"entry-date\" datetime=\"%1$s\">%2$s</time> in <a href=\"%3$s\" title=\"Return to %4$s\" rel=\"gallery\">%5$s</a></span>"
-msgstr "<span class=\"attachment-meta\">Közzétéve: <time class=\"entry-date\" datetime=\"%1$s\">%2$s</time> | Kategória: <a href=\"%3$s\" title=\" %4$s bejegyzéshez\" rel=\"gallery\">%5$s</a></span>"
+#: archive.php:33
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr "Y."
 
-#: image.php:51
-msgid "<span class=\"meta-nav\">&larr;</span> Previous"
-msgstr "<span class=\"meta-nav\">&larr;</span> Előző"
+#: archive.php:33
+msgid "Yearly Archives: %s"
+msgstr "%s. év bejegyzései"
 
-#: image.php:52
-msgid "Next <span class=\"meta-nav\">&rarr;</span>"
-msgstr "Következő <span class=\"meta-nav\">&rarr;</span>"
+#: archive.php:31
+msgctxt "monthly archives date format"
+msgid "F Y"
+msgstr "Y. F"
 
-#: inc/custom-header.php:49
-msgctxt "header image description"
-msgid "Circle"
-msgstr "Kör"
+#: archive.php:31
+msgid "Monthly Archives: %s"
+msgstr "%s havi bejegyzések"
 
-#: inc/custom-header.php:54
-msgctxt "header image description"
-msgid "Diamond"
-msgstr "Gyémánt"
+#: archive.php:29
+msgid "Daily Archives: %s"
+msgstr "%s napi bejegyzések"
 
-#: inc/custom-header.php:59
-msgctxt "header image description"
-msgid "Star"
-msgstr "Csillag"
+#: 404.php:22
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr "Úgy tűnik, ezen a helyen nincs értékelhető találat. Talán egy újabb keresés segíthet."
 
-#: search.php:18
-msgid "Search Results for: %s"
-msgstr "%s kifejezésre történő keresés eredménye"
+#: 404.php:21
+msgid "This is somewhat embarrassing, isn&rsquo;t it?"
+msgstr "Némileg kínos, nem?"
 
-#: tag.php:21
-msgid "Tag Archives: %s"
-msgstr "%s címkével jelölt bejegyzések"
-
-#: taxonomy-post_format.php:23
-msgid "%s Archives"
-msgstr "%s archívum"
-
-#. Theme Name of the plugin/theme
-msgid "Twenty Thirteen"
-msgstr "Twenty Thirteen"
-
-#. Author of the plugin/theme
-msgid "the WordPress team"
-msgstr "WordPress Magyarország Közösség"
+#: 404.php:16
+msgid "Not Found"
+msgstr "Nincs találat"

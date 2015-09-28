@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Magyar Video Embed
-Version: 0.1
+Version: 0.3
 Plugin URI: https://wordpress.org/plugins/magyar-video-embed
 Description: Ez a bővítmény arra való, hogy a különböző magyar videó szolgáltatók linkjeiből is szépen beágyazott videót kapjunk, pont, mintha csak egy youtube link lenne
 Author: DjZoNe
@@ -14,7 +14,6 @@ Author URI: http://djz.hu/
  * Ezek után pedig jöjjön a szégyenfal, akiknek az oldalain nincs ilyen úri huncutság 2015 nyár végén:
  * - hirado.hu - nincs külső beágyazás, ez már nem fért bele az adónkból, mi?
  * - echotv.hu - nagyon szép ez a HTML5 player, de elférne valami embed kód és oembed támogatás
- * - rtl.hu - nincs, az ő szar Silverlight alapú lejátszójukat nem lehet embedelni
  * - atv.hu - nincs külső beágyazás. Ha Carnationtől olvassa valaki, igazán megcsinálhatnátok ;)
  * - klubradio.hu - nincs külső beágyazás
  * - digisport.hu - nincs külső beágyazás 
@@ -35,11 +34,12 @@ function magyar_video_embed()
     wp_embed_unregister_handler('mtvcohu');
     wp_embed_unregister_handler('mnohu');
     wp_embed_unregister_handler('tv2hu');
+    wp_embed_unregister_handler('rtlhu');
 
     wp_embed_register_handler( 'vivatvhu', '#http://(www\.)?vivatv\.hu/([0-9a-zA-Z\-\_\/]+)/(?:videos)/([0-9a-zA-Z\-\_\/]+)\-([\d]+)#i', 'wp_embed_handler_vivatvhu' );
     wp_embed_register_handler( 'mtvcohu', '#http://(www\.)?mtv\.co\.hu/([0-9a-zA-Z\-\_\/]+)/(?:videos)/([0-9a-zA-Z\-\_\/]+)\-([\d]+)#i', 'wp_embed_handler_mtvcohu' );
     wp_embed_register_handler( 'mnohu', '#http://(www\.)?mno\.hu/(?:videok)/([\d]+)#i', 'wp_embed_handler_mnohu' );
-    wp_embed_register_handler( 'tv2hu', '#http://(www\.)?tv2\.hu/(musoraink)/([0-9a-zA-Z\-\_]+)/([\d]+)_([0-9a-zA-Z\-\_]+)\.html#i', 'wp_embed_handler_tv2hu' );
+    wp_embed_register_handler( 'tv2hu', '#http://(www\.)?tv2\.hu/(musoraink)/([0-9a-zA-Z\.\-\_]+)/([\d]+)_([0-9a-zA-Z\.\-\_]+)#i', 'wp_embed_handler_tv2hu' );
     wp_embed_register_handler( 'rtlhu', '#http://(www\.)?rtl\.hu/(rtlklub)/([0-9a-zA-Z\-\_\/]+)#i', 'wp_embed_handler_rtlhu' );
     
     wp_oembed_add_provider( '#http://(www\.)?noltv\.hu/video/([\d]+)\.html#i', 'http://www.noltv.hu/services/oembed', true );
@@ -76,7 +76,7 @@ endif;
 /**
  * tv2.hu wp_embed handler
  *
- * Utoljára frissítve: 2014-12-19 02:40:00 +0100
+ * Utoljára frissítve: 2015-08-26 09:00:00 +0100
  *
  * @author DjZoNe
  * @since 4.1
@@ -91,8 +91,8 @@ function wp_embed_handler_tv2hu( $matches, $attr, $url, $rawattr )
     $ratio = 0.5625;
     $width = floor($content_width);
     $height = floor($content_width * $ratio);
-    
-    $embed = sprintf('<iframe width="%d" height="%d" src="http://tv2.hu/neoplayer/tv2/embed/%d_%s.html/%d" frameborder="0" scrolling="no"></iframe>',$width,$height,$video_id,$slug,$width);
+
+    $embed = sprintf('<iframe width="%d" height="%d" src="http://tv2.hu/neoplayer/tv2/embed/%d_%s/%d" frameborder="0" scrolling="no"></iframe>',$width,$height,$video_id,$slug,$width);
 
     return apply_filters( 'embed_tv2hu', $embed, $matches, $attr, $url, $rawattr );
 }

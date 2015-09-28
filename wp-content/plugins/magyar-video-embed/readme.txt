@@ -1,16 +1,18 @@
 === Magyar Video Embed ===
 Contributors: DjZoNe
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal@djz.hu&item_name=Advanced%20Category%20Excluder%20for%20Wordpress
-Tags: post, feed, rss, search, categories, list, archives, dashboard, manage, plugin, sidebar, widget, seo, google, cms, comments, sitemap
+Tags: oembed, video, audio, post, magyar, hungarian
 Requires at least: 4.1
 Tested up to: 4.3
-Stable tag: 0.1
+Stable tag: 0.3
 
 This plugin helps different hungarian online video service provider videos to be embeded just like youtube links. So, this is not intresting to you unless you are hungarian, or want to make website for hungarians with local video embeders.  
 
 == Description ==
 
 This plugin helps different hungarian online video service provider videos to be embeded just like youtube links.
+
+Ez a bővítmény a különböző magyar tartalomszolgáltatók videó és audió anyagait segít úgy beágyazni a weboldalakba, mintha csak egy youtube link lenne.
 
 == Frequently Asked Questions ==
 
