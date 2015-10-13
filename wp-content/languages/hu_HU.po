@@ -1,14 +1,14 @@
-# Translation of Development in Hungarian
-# This file is distributed under the same license as the Development package.
+# Translation of 4.3.x in Hungarian
+# This file is distributed under the same license as the 4.3.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2015-09-15 15:57:58+0000\n"
+"PO-Revision-Date: 2015-10-05 22:01:59+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/1.0-alpha-1100\n"
-"Project-Id-Version: Development\n"
+"Project-Id-Version: 4.3.x\n"
 
 #. translators: 'rtl' or 'ltr'. This sets the text direction for WordPress.
 #: wp-includes/locale.php:185
@@ -2629,10 +2629,6 @@ msgstr "A sablon \"%s\" könyvtára nem létezik."
 msgid "ERROR: This is not a valid feed template."
 msgstr "HIBA: Érvénytelen  "
 
-#: wp-includes/post-template.php:1667
-msgid "This content is password protected. To view it please enter your password below:"
-msgstr "Ez a tartalom jelszóval védett, megtekintéséhez alul meg kell adni a jelszót:"
-
 #. translators: This is a comma-separated list of very common words that should
 #. be excluded from a search, like a, an, and the. These are usually called
 #. "stopwords". You should not simply translate these individual words into
@@ -2646,6 +2642,10 @@ msgstr "a,az,egy,be,ki,le,fel,meg,el,át,rá,ide,oda,szét,össze,vissza,de,hát
 #: wp-includes/query.php:728
 msgid "In <code>%1$s</code>, use the <code>%2$s</code> method, not the <code>%3$s</code> function. See %4$s."
 msgstr "<code>%1$s</code> műveletnél használjuk a <code>%2$s</code> módszert, ne a <code>%3$s</code> funkciót. (%4$s.)"
+
+#: wp-includes/post-template.php:1667
+msgid "This content is password protected. To view it please enter your password below:"
+msgstr "Ez a tartalom jelszóval védett, megtekintéséhez adjuk meg a jelszót:"
 
 #: wp-includes/class-http.php:1027 wp-includes/class-http.php:1035
 msgid "The SSL certificate for the host could not be verified."
