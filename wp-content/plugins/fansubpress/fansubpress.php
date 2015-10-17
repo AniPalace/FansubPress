@@ -15,4 +15,4 @@ require_once(dirname( __FILE__ ).'/class/FansubPressPlugin.php');
 load_plugin_textdomain('fansubpress-plugin', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
 // Pluginok be lettek töltve, mehet a plugin inicializálás
-add_action( 'plugins_loaded', array( FansubPressPlugin::getInstanceClass(), 'init' ));
+FansubPressPlugin::getInstanceClass()->init();
