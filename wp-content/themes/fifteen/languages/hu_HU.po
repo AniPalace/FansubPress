@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Fifteen WordPress Theme\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-13 18:14+0530\n"
-"PO-Revision-Date: Wed Oct 14 2015 11:56:03 GMT+0200\n"
+"PO-Revision-Date: Wed Oct 14 2015 12:09:50 GMT+0200\n"
 "Last-Translator: newplayer <karasztamas@gmail.com>\n"
 "Language-Team: InkHive <rohit@rohitink.com>\n"
 "Language: Hungarian\n"
@@ -146,11 +146,6 @@ msgid "Website"
 msgstr ""
 
 #: Users/mac/Documents/Developer/Theme-Development/wp-
-#: content/themes/fifteen/content-home.php:22
-msgid "Read More"
-msgstr "Tovább"
-
-#: Users/mac/Documents/Developer/Theme-Development/wp-
 #: content/themes/fifteen/content-page.php:15
 #: Users/mac/Documents/Developer/Theme-Development/wp-
 #: content/themes/fifteen/content-single.php:29
@@ -172,7 +167,7 @@ msgstr ""
 #: Users/mac/Documents/Developer/Theme-Development/wp-
 #: content/themes/fifteen/inc/template-tags.php:89
 msgid "Edit"
-msgstr ""
+msgstr "Szerkesztés"
 
 #: Users/mac/Documents/Developer/Theme-Development/wp-
 #: content/themes/fifteen/content-search.php:42
@@ -862,6 +857,16 @@ msgid "Check this if you do not want to give us credit in your site footer."
 msgstr ""
 
 #: Users/mac/Documents/Developer/Theme-Development/wp-
+#: content/themes/fifteen/sidebar.php:24
+msgid "Meta"
+msgstr ""
+
+#: Users/mac/Documents/Developer/Theme-Development/wp-
+#: content/themes/fifteen/content-home.php:22
+msgid "Read More"
+msgstr "Tovább"
+
+#: Users/mac/Documents/Developer/Theme-Development/wp-
 #: content/themes/fifteen/search.php:10
 #, php-format
 msgid "Search Results for: %s"
@@ -885,8 +890,3 @@ msgstr "Keress bármire ezen a weboldalon..."
 #: content/themes/fifteen/searchform-top.php:15
 msgid "Cancel"
 msgstr "Mégse"
-
-#: Users/mac/Documents/Developer/Theme-Development/wp-
-#: content/themes/fifteen/sidebar.php:24
-msgid "Meta"
-msgstr ""
