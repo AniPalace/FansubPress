@@ -11,3 +11,16 @@
  Tags:         fansubpress, fansub, fansubber, anime, manga
  Text Domain:  fansubpress
 */
+
+#social-icons {
+  display: none;
+}
+
+.site-branding {
+  text-align: left;
+}
+
+.content-area-download {
+  margin-top: 0px !important;
+  padding-top: 0px !important;
+}
