@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Fifteen WordPress Theme\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-13 18:14+0530\n"
-"PO-Revision-Date: Wed Oct 14 2015 11:55:29 GMT+0200\n"
+"PO-Revision-Date: Wed Oct 14 2015 11:56:03 GMT+0200\n"
 "Last-Translator: newplayer <karasztamas@gmail.com>\n"
 "Language-Team: InkHive <rohit@rohitink.com>\n"
 "Language: Hungarian\n"
@@ -865,7 +865,7 @@ msgstr ""
 #: content/themes/fifteen/search.php:10
 #, php-format
 msgid "Search Results for: %s"
-msgstr ""
+msgstr "Találat erre: %s"
 
 #: Users/mac/Documents/Developer/Theme-Development/wp-
 #: content/themes/fifteen/searchform-top.php:11
