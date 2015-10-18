@@ -37,7 +37,7 @@ class FansubPress_Recent_Posts extends WP_Widget {
 
 		         <li class='rp-item'>
 		         <?php if( has_post_thumbnail() ) : ?>
-		         <div class='rp-thumb'><a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('thumbnail'); ?></a></div>
+		         <div class='rp-thumb'><a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('project-download'); ?></a></div>
 		         <?php
 		         else :
 		         ?>
