@@ -13,7 +13,24 @@
 */
 
 #social-icons {
-  display: none;
+    text-align: center;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+		color: white;
+		text-align: right;
+		font-size: 18px;
+		margin-bottom: 8px;
+		cursor: pointer;
+}
+
+#social-icons a{
+	color: white;
+	padding-left: 5px;
+	text-decoration: none;
+}
+
+#social-icons a:focus{
+	outline: none;
 }
 
 .site-branding {
