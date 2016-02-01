@@ -2,6 +2,7 @@
 class FansubPressPluginBase {
   const CLASS_BASE = '';
   const CLASS_DOWNLOAD = 'Download';
+  const CLASS_TEMPLATE = 'Template';
 
   static $instance = array();
 
@@ -23,4 +24,15 @@ class FansubPressPluginBase {
 
     return self::$instance[$class];
   }
+  
+  /**
+   * Init függvény, Ez mindig van
+   * 
+   * @author NewPlayer
+   * @since 2016-02-01
+   */
+  function init() {
+      
+  }
+  
 }

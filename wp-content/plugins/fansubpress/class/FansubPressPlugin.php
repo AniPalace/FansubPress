@@ -18,6 +18,8 @@ class FansubPressPlugin extends FansubPressPluginBase{
     add_action('parse_request', array($this, 'downloadPermalink'));
 
     add_action('init',array($this, 'siteInit'));
+    
+    self::getInstanceClass(self::CLASS_TEMPLATE)->init();
   }
 
   function downloadPermalink(&$wp_query) {
