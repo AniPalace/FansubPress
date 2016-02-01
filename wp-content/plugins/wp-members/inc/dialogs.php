@@ -6,13 +6,12 @@
  * 
  * This file is part of the WP-Members plugin by Chad Butler
  * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2015  Chad Butler
+ * Copyright (c) 2006-2016  Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
- * @package WordPress
- * @subpackage WP-Members
+ * @package WP-Members
  * @author Chad Butler
- * @copyright 2006-2015
+ * @copyright 2006-2016
  *
  * Functions Included:
  * - wpmem_inc_loginfailed
@@ -193,10 +192,44 @@ function wpmem_inc_memberlinks( $page = 'members' ) {
 	switch ( $page ) {
 
 	case 'members':
-		$str  = '<ul><li><a href="'  .$link . 'a=edit">' . __( 'Edit My Information', 'wp-members' ) . '</a></li>
-				<li><a href="' . $link . 'a=pwdchange">' . __( 'Change Password', 'wp-members' ) . '</a></li>';
-		if ( $wpmem->use_exp == 1 && function_exists( 'wpmem_user_page_detail' ) ) { $str .= wpmem_user_page_detail(); }
-		$str.= '</ul>';
+		
+		$arr = array(
+			'before_wrapper' => '',
+			'wrapper_before' => '<ul>',
+			'wrapper_after'  => '</ul>',
+			'rows'           => array(
+				'<li><a href="' . $link . 'a=edit">'      . __( 'Edit My Information', 'wp-members' ) . '</a></li>',
+				'<li><a href="' . $link . 'a=pwdchange">' . __( 'Change Password', 'wp-members' )     . '</a></li>',
+			),
+		);
+
+		if ( defined( 'WPMEM_EXP_MODULE' ) && $wpmem->use_exp == 1 && function_exists( 'wpmem_user_page_detail' ) ) {
+			$arr['rows'][] = wpmem_user_page_detail();
+		}
+		
+		/**
+		 * Filter the member links array.
+		 *
+		 * @since 3.0.9
+		 *
+		 * @param array $arr {
+		 *      The components of the links.
+		 *
+		 *      @type string $before_wrapper Anything that comes before the wrapper.
+		 *      @type string $wrapper_before The wrapper opening tag (default: <ul>).
+		 *      @type string $wrapper_after  The wrapper closing tag (default: </ul>).
+		 *      @type array  $rows           Row items HTML.
+		 * }
+		 */
+		$arr = apply_filters( 'wpmem_member_links_args', $arr );
+		
+		$str = $arr['before_wrapper'];
+		$str.= $arr['wrapper_before'];
+		foreach ( $arr['rows'] as $row ) {
+			$str.= $row;
+		}
+		$str.= $arr['wrapper_after'];
+	
 		/**
 		 * Filter the links displayed on the User Profile page (logged in state).
 		 *
@@ -208,11 +241,40 @@ function wpmem_inc_memberlinks( $page = 'members' ) {
 		break;
 
 	case 'register':
-		$str = '<p>' . sprintf( __( 'You are logged in as %s', 'wp-members' ), $user_login ) . '</p>
-			<ul>
-				<li><a href="' . $logout . '">' . __( 'Click to log out.', 'wp-members' ) . '</a></li>
-				<li><a href="' . get_option('home') . '">' . __( 'Begin using the site.', 'wp-members' ) . '</a></li>
-			</ul>';
+		
+		$arr = array(
+			'before_wrapper' => '<p>' . sprintf( __( 'You are logged in as %s', 'wp-members' ), $user_login ) . '</p>',
+			'wrapper_before' => '<ul>',
+			'wrapper_after'  => '</ul>',
+			'rows'           => array(
+				'<li><a href="' . $logout . '">' . __( 'Click to log out.', 'wp-members' ) . '</a></li>',
+				'<li><a href="' . get_option('home') . '">' . __( 'Begin using the site.', 'wp-members' ) . '</a></li>',
+			),
+		);
+		
+		/**
+		 * Filter the register links array.
+		 *
+		 * @since 3.0.9
+		 *
+		 * @param array $arr {
+		 *      The components of the links.
+		 *
+		 *      @type string $before_wrapper HTML before the wrapper (default: login status).
+		 *      @type string $wrapper_before The wrapper opening tag (default: <ul>).
+		 *      @type string $wrapper_after  The wrapper closing tag (default: </ul>).
+		 *      @type array  $rows           Row items HTML.
+		 * }
+		 */
+		$arr = apply_filters( 'wpmem_register_links_args', $arr );
+		
+		$str = $arr['before_wrapper'];
+		$str.= $arr['wrapper_before'];
+		foreach ( $arr['rows'] as $row ) {
+			$str.= $row;
+		}
+		$str.= $arr['wrapper_after'];
+		
 		/**
 		 * Filter the links displayed on the Register page (logged in state).
 		 *
@@ -389,5 +451,105 @@ function wpmem_page_user_edit( $wpmem_regchk, $content ) {
 	return $content;
 }
 endif;
+
+
+/**
+ * Forgot username form.
+ *
+ * This function creates a form for retrieving a forgotten username.
+ *
+ * @since 3.0.8
+ *
+ * @param  string $wpmem_regchk
+ * @param  string $content
+ * @return string $content
+ */
+function wpmem_page_forgot_username( $wpmem_regchk, $content ) {
+	
+	if ( ! is_user_logged_in() ) {
+
+		global $wpmem;
+		switch( $wpmem->regchk ) {
+
+		case "usernamefailed":
+			$msg = __( 'Sorry, that email address was not found.', 'wp-members' );
+			$content = $content
+				. wpmem_inc_regmessage( 'usernamefailed', $msg ) 
+				. wpmem_inc_forgotusername();
+			$wpmem->regchk = ''; // Clear regchk.
+			break;
+
+		case "usernamesuccess":
+			$email = ( isset( $_POST['user_email'] ) ) ? $_POST['user_email'] : '';
+			$msg = sprintf( __( 'An email was sent to %s with your username.', 'wp-members' ), $email );
+			$content = $content . wpmem_inc_regmessage( 'usernamesuccess', $msg );
+			$wpmem->regchk = ''; // Clear regchk.
+			break;
+
+		default:
+			$content = $content . wpmem_inc_forgotusername();
+			break;
+		}
+		
+	}
+
+	return $content;
+
+}
+
+
+/**
+ * Forgot Username Form.
+ *
+ * Loads the form for retrieving a username.
+ *
+ * @since 3.0.8
+ *
+ * @return string $str The generated html for the forgot username form.
+ */
+function wpmem_inc_forgotusername() {
+
+	// create the default inputs
+	$default_inputs = array(
+		array(
+			'name'   => __( 'Email Address', 'wp-members' ), 
+			'type'   => 'text',
+			'tag'    => 'user_email',
+			'class'  => 'username',
+			'div'    => 'div_text',
+		),
+	);
+
+	/**
+	 * Filter the array of forgot username form fields.
+	 *
+	 * @since 2.9.0
+	 *
+	 * @param array $default_inputs An array matching the elements used by default.
+ 	 */	
+	$default_inputs = apply_filters( 'wpmem_inc_forgotusername_inputs', $default_inputs );
+	
+	$defaults = array(
+		'heading'      => __( 'Retrieve username', 'wp-members' ), 
+		'action'       => 'getusername', 
+		'button_text'  => __( 'Retrieve username', 'wp-members' ), 
+		'inputs'       => $default_inputs,
+	);
+
+	/**
+	 * Filter the arguments to override change password form defaults.
+	 *
+	 * @since 
+	 *
+	 * @param array $args An array of arguments to use. Default null.
+ 	 */
+	$args = apply_filters( 'wpmem_inc_forgotusername_args', '' );
+
+	$arr  = wp_parse_args( $args, $defaults );
+
+    $str  = wpmem_login_form( 'page', $arr );
+	
+	return $str;
+}
 
 // End of file.

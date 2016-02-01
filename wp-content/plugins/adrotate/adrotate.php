@@ -2,12 +2,12 @@
 /*
 Plugin Name: AdRotate
 Plugin URI: https://ajdg.solutions/products/adrotate-for-wordpress/?pk_campaign=adrotatefree-pluginpage
-Author: Arnan de Gans of AJdG Solutions
+Author: Arnan de Gans
 Author URI: http://ajdg.solutions/?pk_campaign=adrotatefree-pluginpage
-Description: Used on over a hundred thousand websites and by even more people! AdRotate is the popular choice for monetizing your website with adverts while keeping things simple.
+Description: The popular choice for monetizing your website with adverts while keeping things simple. Start making money today!
 Text Domain: adrotate
 Domain Path: /languages/
-Version: 3.13.1
+Version: 3.14.2
 License: GPLv3
 */
 
@@ -22,9 +22,9 @@ License: GPLv3
 ------------------------------------------------------------------------------------ */
 
 /*--- AdRotate values ---------------------------------------*/
-define("ADROTATE_DISPLAY", '3.13.1');
+define("ADROTATE_DISPLAY", '3.14.2');
 define("ADROTATE_VERSION", 380);
-define("ADROTATE_DB_VERSION", 53);
+define("ADROTATE_DB_VERSION", 56);
 /*-----------------------------------------------------------*/
 
 /*--- Load Files --------------------------------------------*/

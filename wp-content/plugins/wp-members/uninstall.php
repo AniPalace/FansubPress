@@ -6,13 +6,12 @@
  * 
  * This file is part of the WP-Members plugin by Chad Butler
  * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2015  Chad Butler
+ * Copyright (c) 2006-2016  Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
- * @package WordPress
- * @subpackage WP-Members
+ * @package WP-Members
  * @author Chad Butler
- * @copyright 2006-2015
+ * @copyright 2006-2016
  */
 
 // If uninstall is not called from WordPress, kill the uninstall.
@@ -56,14 +55,15 @@ function wpmem_uninstall_options() {
 	delete_option( 'wpmembers_export'   );
 	delete_option( 'wpmembers_utfields' );
 
-	delete_option( 'wpmembers_email_newreg' );
-	delete_option( 'wpmembers_email_newmod' );
-	delete_option( 'wpmembers_email_appmod' );
-	delete_option( 'wpmembers_email_repass' );
-	delete_option( 'wpmembers_email_footer' );
-	delete_option( 'wpmembers_email_notify' );
-	delete_option( 'wpmembers_email_wpfrom' );
-	delete_option( 'wpmembers_email_wpname' );
+	delete_option( 'wpmembers_email_newreg'  );
+	delete_option( 'wpmembers_email_newmod'  );
+	delete_option( 'wpmembers_email_appmod'  );
+	delete_option( 'wpmembers_email_repass'  );
+	delete_option( 'wpmembers_email_footer'  );
+	delete_option( 'wpmembers_email_notify'  );
+	delete_option( 'wpmembers_email_wpfrom'  );
+	delete_option( 'wpmembers_email_wpname'  );
+	delete_option( 'wpmembers_email_getuser' );
 
 	delete_option( 'widget_wpmemwidget' );
 	
@@ -77,4 +77,4 @@ function wpmem_uninstall_options() {
 	delete_option( 'wpmembers_attrib'   );
 }
 
-/** End of File **/
+// End of file.

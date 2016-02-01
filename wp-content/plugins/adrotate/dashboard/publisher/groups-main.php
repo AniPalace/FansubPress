@@ -25,7 +25,7 @@
 		</div>
 	</div>
 	
-   	<table class="widefat" style="margin-top: .5em">
+   	<table class="widefat tablesorter manage-groups-main" style="margin-top: .5em">
 		<thead>
 		<tr>
 			<td class="check-column">&nbsp;</td>

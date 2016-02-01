@@ -32,7 +32,7 @@
 		<br class="clear" />
 	</div>
 	
-		<table class="widefat" style="margin-top: .5em">
+		<table class="widefat tablesorter manage-ads-error" style="margin-top: .5em">
 			<thead>
 			<tr>
 				<td scope="col" class="manage-column column-cb check-column"><input type="checkbox" /></td>

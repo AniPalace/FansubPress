@@ -6,17 +6,18 @@
  * 
  * This file is part of the WP-Members plugin by Chad Butler
  * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2015  Chad Butler
+ * Copyright (c) 2006-2016  Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
- * @package WordPress
- * @subpackage WP-Members
+ * @package WP-Members
  * @author Chad Butler
- * @copyright 2006-2015
+ * @copyright 2006-2016
  *
  * Functions included:
  * - wpmem_a_build_options
+ * - wpmem_update_cpts
  * - wpmem_update_options
+ * - wpmem_admin_new_settings
  * - wpmem_admin_style_list
  * - wpmem_admin_page_list
  */
@@ -31,6 +32,7 @@ function wpmem_a_build_options() {
 
 	global $wpmem;
 
+	/** This filter is documented in wp-members/inc/email.php */
 	$admin_email = apply_filters( 'wpmem_notify_addr', get_option( 'admin_email' ) );
 	$chg_email   = __( sprintf( '%sChange%s or %sFilter%s this address', '<a href="' . site_url( 'wp-admin/options-general.php', 'admin' ) . '">', '</a>', '<a href="http://rocketgeek.com/plugins/wp-members/users-guide/filter-hooks/wpmem_notify_addr/">', '</a>' ), 'wp-members' );
 	$help_link   = __( sprintf( 'See the %sUsers Guide on plugin options%s.', '<a href="http://rocketgeek.com/plugins/wp-members/users-guide/plugin-settings/options/" target="_blank">', '</a>' ), 'wp-members' );	
@@ -75,8 +77,9 @@ function wpmem_a_build_options() {
 							// Content Blocking option group.
 							$i = 0;
 							$len = count( $post_arr );
-							foreach ( $post_arr as $key => $val ) { 
-								if ( $key == 'post' || $key == 'page' ) { // @todo - holding off on CPT support. ?>
+							foreach ( $post_arr as $key => $val ) {  
+								if ( $key == 'post' || $key == 'page' || ( isset( $wpmem->post_types ) && array_key_exists( $key, $wpmem->post_types ) ) ) {
+								?>
 								<li<?php echo ( $i == $len - 1 ) ? ' style="border-bottom:1px solid #eee;"' : ''; ?>>
 									<label><?php echo ( $i == 0 ) ? 'Content Blocking' : '&nbsp;'; ?></label>
 									<select name="wpmem_block_<?php echo $key; ?>">
@@ -96,19 +99,32 @@ function wpmem_a_build_options() {
 								'show_excerpt' => __( 'Show Excerpts', 'wp-members' ), 
 								'show_login'   => __( 'Show Login Form', 'wp-members' ), 
 								'show_reg'     => __( 'Show Registration Form', 'wp-members' ),
+								'autoex'       => __( 'Auto Excerpt:', 'wp-members' ),
 							);
 
 							foreach ( $option_group_array as $item_key => $item_val ) {
 								$i = 0;
 								$len = count( $post_arr );
 								foreach ( $post_arr as $key => $val ) {
-									if ( $key == 'post' || $key == 'page' ) { // @todo - holding off on CPT support.
-									$setting = ( isset( $wpmem->{$item_key}[ $key ] ) ) ? $wpmem->{$item_key}[ $key ] : 0;
+									if ( $key == 'post' || $key == 'page' || ( isset( $wpmem->post_types ) && array_key_exists( $key, $wpmem->post_types ) ) ) {
 									?>
 									<li<?php echo ( $i == $len - 1 ) ? ' style="border-bottom:1px solid #eee;"' : ''; ?>>
 										<label><?php echo ( $i == 0 ) ? $item_val : '&nbsp;'; ?></label>
-										<input name="wpmem_<?php echo $item_key; ?>_<?php echo $key; ?>" type="checkbox" id="" value="1"<?php echo wpmem_selected( 1, $setting ); ?> /> <span><?php echo $val; ?></span>
-									</li>
+									<?php if ( 'autoex' == $item_key ) { 
+										if ( isset( $wpmem->{$item_key}[ $key ] ) && $wpmem->{$item_key}[ $key ]['enabled'] == 1 ) {
+											$setting = 1; 
+											$ex_len  = $wpmem->{$item_key}[ $key ]['length'];
+										} else {
+											$setting = 0;
+											$ex_len  = ''; 
+										} ?>
+                                    	<input name="wpmem_<?php echo $item_key; ?>_<?php echo $key; ?>" type="checkbox" id="" value="1"<?php echo wpmem_selected( 1, $setting ); ?> /> <span><?php echo $val; ?></span>&nbsp;&nbsp;&nbsp;&nbsp;
+										<span><?php _e( 'Number of words in excerpt:', 'wp-members' ); ?> </span><input name="wpmem_autoex_<?php echo $key; ?>_len" type="text" size="5" value="<?php echo $ex_len; ?>" />
+									<?php } else {
+										$setting = ( isset( $wpmem->{$item_key}[ $key ] ) ) ? $wpmem->{$item_key}[ $key ] : 0; ?>
+                                    	<input name="wpmem_<?php echo $item_key; ?>_<?php echo $key; ?>" type="checkbox" id="" value="1"<?php echo wpmem_selected( 1, $setting ); ?> /> <span><?php echo $val; ?></span>
+									<?php } ?>
+                                    </li>
 									<?php $i++;
 									}
 								}
@@ -151,11 +167,6 @@ function wpmem_a_build_options() {
 								<label><?php _e( 'Attribution', 'wp-members' ); ?></label>
 								<input name="attribution" type="checkbox" id="attribution" value="1" <?php if ( $attribution == 1 ) { echo "checked"; }?> />&nbsp;&nbsp;
 								<span class="description"><?php _e( 'Attribution is appreciated!  Display "powered by" link on register form?', 'wp-members' ); ?></span>
-							  </li>
-							<?php $auto_ex = $wpmem->autoex; ?>
-							  <li>
-								<label><?php _e( 'Auto Excerpt:', 'wp-members' ); ?></label>
-								<input type="checkbox" name="wpmem_autoex" value="1" <?php if ( $auto_ex['auto_ex'] == 1 ) { echo "checked"; } ?> />&nbsp;&nbsp;&nbsp;&nbsp;<?php _e( 'Number of words in excerpt:', 'wp-members' ); ?> <input name="wpmem_autoex_len" type="text" size="5" value="<?php if ( $auto_ex['auto_ex_len'] ) { echo $auto_ex['auto_ex_len']; } ?>" />&nbsp;<span class="description"><?php _e( 'Optional', 'wp-members' ); ?>. <?php _e( 'Automatically creates an excerpt', 'wp-members' ); ?></span>
 							  </li>
 							  <li>
 								<label><?php _e( 'Enable CAPTCHA', 'wp-members' ); ?></label>
@@ -225,6 +236,34 @@ function wpmem_a_build_options() {
 						</form>
 					</div><!-- .inside -->
 				</div>
+                <?php if ( $post_types ) { ?>
+                <div class="postbox">
+                    <h3><span><?php _e( 'Custom Post Types', 'wp-members' ); ?></span></h3>
+                    <div class="inside">
+                    	<form name="updatecpts" id="updatecpts" method="post" action="<?php echo $_SERVER['REQUEST_URI']?>">
+						<?php wp_nonce_field( 'wpmem-update-cpts' ); ?>
+                    		<table class="form-table">
+                                <tr>
+                                    <th scope="row">Add to WP-Members Settings</th>
+                                    <td><fieldset><?php
+									foreach ( $post_arr as $key => $val ) {
+										if ( 'post' != $key && 'page' != $key ) {
+											$checked = ( isset( $wpmem->post_types ) && array_key_exists( $key, $wpmem->post_types ) ) ? ' checked' : '';
+                                       		echo '<label for="' . $key . '"><input type="checkbox" name="wpmembers_handle_cpts[]" value="' . $key . '"' . $checked . ' />' . $val . '</label><br />';
+										}
+									}
+									?></fieldset>
+                                    </td>
+                                </tr>
+                                <tr>
+                                	<input type="hidden" name="wpmem_admin_a" value="update_cpts" />
+                                	<td colspan="2"><?php submit_button( __( 'Update Settings', 'wp-members' ) ); ?></td>
+                                </tr>
+                        	</table>
+                        </form>
+                    </div>
+                </div>
+                <?php } ?>
 			</div><!-- #post-body-content -->
 		</div><!-- #post-body -->
 	</div><!-- .metabox-holder -->
@@ -233,14 +272,89 @@ function wpmem_a_build_options() {
 
 
 /**
+ * Updates the plugin settings on Custom Post Types to manage.
+ *
+ * @since 3.0.9
+ *
+ * @return string The updated message.
+ */
+function wpmem_update_cpts() {
+	
+	// Check nonce.
+	check_admin_referer( 'wpmem-update-cpts' );
+	
+	// Get the main settings array as it stands.
+	$wpmem_newsettings = get_option( 'wpmembers_settings' );
+	
+	// Assemble CPT settings.
+	$cpts = array();
+	
+	$post_arr = array();
+	$post_types = get_post_types( array( 'public' => true, '_builtin' => false ), 'names', 'and' );
+	if ( $post_types ) {
+		foreach ( $post_types as $post_type ) { 
+			$cpt_obj = get_post_type_object( $post_type );
+			$post_arr[ $cpt_obj->name ] = $cpt_obj->labels->name;
+		}
+	}
+	
+	$post_vals = ( isset( $_POST['wpmembers_handle_cpts'] ) ) ? $_POST['wpmembers_handle_cpts'] : false;
+	if ( $post_vals ) {
+		foreach ( $post_vals as $val ) {
+			$cpts[ $val ] = $post_arr[ $val ];
+		}
+	} else {
+		$cpts = array();
+	}
+	$wpmem_newsettings['post_types'] = $cpts;
+	
+	// Update settings, remove or add CPTs.
+	$chk_settings = array( 'block', 'show_excerpt', 'show_login', 'show_reg', 'autoex' );
+	foreach ( $chk_settings as $chk ) {
+		// Handle removing unmanaged CPTs.
+		foreach ( $wpmem_newsettings[ $chk ] as $key => $val ) {
+			if ( 'post' != $key && 'page' != $key ) {
+				// If the $key is not in managed CPTs, remove it.
+				if ( ! array_key_exists( $key, $cpts ) ) {
+					unset( $wpmem_newsettings[ $chk ][ $key ] );
+				}
+			}
+		}
+		// Handle adding managed CPTs.
+		foreach ( $cpts as $key => $val ) {
+			if ( ! array_key_exists( $key, $wpmem_newsettings[ $chk ] ) ) {
+				if ( 'autoex' == $chk ) {
+					// Auto excerpt is an array.
+					$wpmem_newsettings[ $chk ][ $key ] = array(
+						'enabled' => 0,
+						'length'  => '',
+					);
+				} else {
+					// All other settings are 0|1.
+					$wpmem_newsettings[ $chk ][ $key ] = 0;
+				}
+			}
+		}
+	}
+	
+	wpmem_admin_new_settings( $wpmem_newsettings );
+	
+	return __( 'Custom Post Type settings were updated', 'wp-members' );
+}
+
+
+/**
  * Updates the plugin options.
  *
  * @since 2.8.0
  *
- * @return string The options updated message.
+ * @global object $wpmem The WP_Members object.
+ * @return string        The options updated message.
  */
 function wpmem_update_options() {
 
+	global $wpmem;
+	
 	// Check nonce.
 	check_admin_referer( 'wpmem-update-settings' );
 
@@ -273,11 +387,6 @@ function wpmem_update_options() {
 
 	$wpmem_settings_style = ( isset( $_POST['wpmem_settings_style'] ) ) ? $_POST['wpmem_settings_style'] : false;
 
-	$wpmem_autoex = array (
-		'auto_ex'     => isset( $_POST['wpmem_autoex'] ) ? $_POST['wpmem_autoex'] : 0,
-		'auto_ex_len' => isset( $_POST['wpmem_autoex_len'] ) ? $_POST['wpmem_autoex_len'] : '',
-	);
-
 	$wpmem_newsettings = array(
 		'version' => WPMEM_VERSION,
 		'notify'    => ( isset( $_POST['wpmem_settings_notify']          ) ) ? $_POST['wpmem_settings_notify']          : 0,
@@ -293,27 +402,32 @@ function wpmem_update_options() {
 		),
 		'cssurl'    => ( $cssurl ) ? $cssurl : '',
 		'style'     => $wpmem_settings_style,
-		'autoex'    => $wpmem_autoex,
 		'attrib'    => ( isset( $_POST['attribution'] ) ) ? $_POST['attribution'] : 0,
 	);
 
 	// Build an array of post types
-	$post_types = get_post_types( array( 'public' => true, '_builtin' => false ), 'names', 'and' );
 	$post_arr = array( 'post', 'page' );
-	if ( $post_types ) {
-		foreach ( $post_types as $post_type ) { 
-			$cpt_obj = get_post_type_object( $post_type );
-			$post_arr[] = $cpt_obj->name;
+	if ( isset( $wpmem->post_types ) ) {
+		$wpmem_newsettings['post_types'] = $wpmem->post_types;
+		foreach ( $wpmem_newsettings['post_types'] as $key => $val ) { 
+			$post_arr[] = $key;
 		}
 	}
 	
 	// Get settings for blocking, excerpts, show login, and show registration for posts, pages, and custom post types.
-	$option_group_array = array( 'block', 'show_excerpt', 'show_login', 'show_reg' );
+	$option_group_array = array( 'block', 'show_excerpt', 'show_login', 'show_reg', 'autoex' );
 	foreach ( $option_group_array as $option_group_item ) {
 		$arr = array();
 		foreach ( $post_arr as $post_type ) {
 			$post_var = 'wpmem_' . $option_group_item . '_' . $post_type;
-			$arr[ $post_type ] = ( isset( $_POST[ $post_var ] ) ) ? $_POST[ $post_var ] : 0;
+			if ( $option_group_item == 'autoex' ) {
+				// Auto excerpt is an array.
+				$arr[ $post_type ]['enabled'] = ( isset( $_POST[ $post_var ] ) ) ? $_POST[ $post_var ] : 0;
+				$arr[ $post_type ]['length']  = ( isset( $_POST[ $post_var ] ) ) ? ( ( $_POST[ $post_var . '_len' ] == '' ) ? 0 : $_POST[ $post_var . '_len' ] ) : '';
+			} else {
+				// All other settings are 0|1.
+				$arr[ $post_type ] = ( isset( $_POST[ $post_var ] ) ) ? $_POST[ $post_var ] : 0;
+			}
 		}
 		$wpmem_newsettings[ $option_group_item ] = $arr;
 	}
@@ -323,7 +437,7 @@ function wpmem_update_options() {
 	 * check to see if the current admin has been 
 	 * activated so they don't accidentally lock themselves
 	 * out later.
-	*/
+	 */
 	if ( isset( $_POST['wpmem_settings_moderate'] ) == 1 ) {
 		global $current_user;
 		get_currentuserinfo();
@@ -331,14 +445,36 @@ function wpmem_update_options() {
 		update_user_meta( $user_ID, 'active', 1 );
 	}
 
-	update_option( 'wpmembers_settings', $wpmem_newsettings );
-
-	global $wpmem;
-	foreach ( $wpmem_newsettings as $key => $val ) {
-		$wpmem->$key = $val;
-	}
+	wpmem_admin_new_settings( $wpmem_newsettings );
 
 	return __( 'WP-Members settings were updated', 'wp-members' );
+}
+
+
+/**
+ * Puts new settings into the current object.
+ *
+ * @since 3.0.9
+ *
+ * @global $wpmem
+ * @param $new
+ * @return $settings
+ */
+function wpmem_admin_new_settings( $new ) {
+	
+	// Update saved settings.
+	update_option( 'wpmembers_settings', $new );
+	
+	// Update the current WP_Members object with the new settings.
+	global $wpmem;
+	foreach ( $new as $key => $val ) {
+		if ( 'user_pages' == $key ) {
+			foreach ( $val as $subkey => $subval ) {
+				$val[ $subkey ] = ( is_numeric( $subval ) ) ? get_page_link( $subval ) : $subval;
+			}
+		}
+		$wpmem->$key = $val;
+	}
 }
 
 
@@ -354,6 +490,7 @@ function wpmem_admin_style_list( $style ) {
 	$list = array(
 		'No Float'                   => WPMEM_DIR . 'css/generic-no-float.css',
 		'Rigid'                      => WPMEM_DIR . 'css/generic-rigid.css',
+		'Twenty Sixteen - no float'  => WPMEM_DIR . 'css/wp-members-2016-no-float.css',
 		'Twenty Fifteen'             => WPMEM_DIR . 'css/wp-members-2015.css',
 		'Twenty Fifteen - no float'  => WPMEM_DIR . 'css/wp-members-2015-no-float.css',
 		'Twenty Fourteen'            => WPMEM_DIR . 'css/wp-members-2014.css',
@@ -401,8 +538,8 @@ function wpmem_admin_page_list( $val, $show_custom_url = true ) {
 	echo '<option value=""'; echo ( $selected == 'select a page' ) ? ' selected' : ''; echo '>'; echo esc_attr( __( 'Select a page' ) ); echo '</option>';
 
 	foreach ( $pages as $page ) {
-		$selected = ( get_page_link( $page->ID ) == $val ) ? true : $selected;
-		$option   = '<option value="' . get_page_link( $page->ID ) . '"' . wpmem_selected( get_page_link( $page->ID ), $val, 'select' ) . '>';
+		$selected = ( get_page_link( $page->ID ) == $val ) ? true : $selected; echo "VAL: " . $val . ' PAGE LINK: ' . get_page_link( $page->ID );
+		$option   = '<option value="' . $page->ID . '"' . wpmem_selected( get_page_link( $page->ID ), $val, 'select' ) . '>';
 		$option  .= $page->post_title;
 		$option  .= '</option>';
 		echo $option;
@@ -413,4 +550,4 @@ function wpmem_admin_page_list( $val, $show_custom_url = true ) {
 	}
 }
 
-/** End of File **/
+// End of file.

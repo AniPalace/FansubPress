@@ -1,9 +1,16 @@
 <?php
 /**
- * The WP-Members Class.
+ * The WP_Members Class.
  *
- * @since 3.0
+ * This is the main WP_Members object class. This class contains functions
+ * for loading settings, shortcodes, hooks to WP, plugin dropins, constants,
+ * and registration fields. It also manages whether content should be blocked.
+ *
+ * @package WP-Members
+ * @subpackage WP_Members Object Class
+ * @since 3.0.0
  */
+
 class WP_Members {
 
 	/**
@@ -17,15 +24,19 @@ class WP_Members {
 		 * Filter the options before they are loaded into constants.
 		 *
 		 * @since 2.9.0
+		 * @since 3.0.0 Moved to the WP_Members class.
 		 *
 		 * @param array $this->settings An array of the WP-Members settings.
 		 */
 		$settings = apply_filters( 'wpmem_settings', get_option( 'wpmembers_settings' ) );
 
 		// Validate that v3 settings are loaded.
-		if ( ! isset( $settings['version'] ) ) {
-			// If settings were not properly built during plugin upgrade.
+		if ( ! isset( $settings['version'] ) || $settings['version'] != WPMEM_VERSION ) {
+			/**
+			 * Load installation routine.
+			 */
 			require_once( WPMEM_PATH . 'wp-members-install.php' );
+			// Update settings.
 			$settings = apply_filters( 'wpmem_settings', wpmem_update_settings() );
 		}
 		
@@ -33,6 +44,8 @@ class WP_Members {
 		foreach ( $settings as $key => $val ) {
 			$this->$key = $val;
 		}
+		
+		$this->load_user_pages();
 
 		// Set the stylesheet.
 		$this->cssurl = ( isset( $this->style ) && $this->style == 'use_custom' ) ? $this->cssurl : $this->style;
@@ -45,13 +58,18 @@ class WP_Members {
 	 */
 	function load_shortcodes() {
 
+		/**
+		 * Load the shortcode functions.
+		 */
 		require_once( WPMEM_PATH . 'inc/shortcodes.php' );
+		
 		add_shortcode( 'wp-members',       'wpmem_shortcode'     );
 		add_shortcode( 'wpmem_field',      'wpmem_shortcode'     );
 		add_shortcode( 'wpmem_logged_in',  'wpmem_sc_logged_in'  );
 		add_shortcode( 'wpmem_logged_out', 'wpmem_sc_logged_out' );
 		add_shortcode( 'wpmem_logout',     'wpmem_shortcode'     );
 		add_shortcode( 'wpmem_form',       'wpmem_sc_forms'      );
+		add_shortcode( 'wpmem_show_count', 'wpmem_sc_user_count' );
 		
 		/**
 		 * Fires after shortcodes load (for adding additional custom shortcodes).
@@ -131,7 +149,7 @@ class WP_Members {
 	/**
 	 * Loads pre-3.0 constants (included primarily for add-on compatibility).
 	 *
-	 * @since 3.0
+	 * @since 3.0.0
 	 */
 	function load_constants() {
 		( ! defined( 'WPMEM_BLOCK_POSTS'  ) ) ? define( 'WPMEM_BLOCK_POSTS',  $this->block['post']  ) : '';
@@ -156,6 +174,8 @@ class WP_Members {
 	 * Gets the requested action.
 	 *
 	 * @since 3.0.0
+	 *
+	 * @global string $wpmem_a The WP-Members action variable.
 	 */
 	function get_action() {
 
@@ -174,6 +194,8 @@ class WP_Members {
 	 * Gets the regchk value.
 	 *
 	 * @since 3.0.0
+	 *
+	 * @global string $wpmem_a The WP-Members action variable.
 	 *
 	 * @param  string $action The action being done.
 	 * @return string         The regchk value.
@@ -198,6 +220,10 @@ class WP_Members {
 			
 			case 'pwdreset':
 				$regchk = wpmem_reset_password();
+				break;
+			
+			case 'getusername':
+				$regchk = wpmem_retrieve_username();
 				break;
 			
 			case 'register':
@@ -237,58 +263,64 @@ class WP_Members {
 	 * This function was originally stand alone in the core file and
 	 * was moved to the WP_Members class in 3.0.
 	 *
-	 * @since 3.0
+	 * @since 3.0.0
 	 *
-	 * @return bool $block true|false
+	 * @global object $post  The WordPress Post object.
+	 * @return bool   $block true|false
 	 */
 	function is_blocked() {
 	
 		global $post;
+		
+		if ( $post ) {
 
-		// Backward compatibility for old block/unblock meta.
-		$meta = get_post_meta( $post->ID, '_wpmem_block', true );
-		if ( ! $meta ) {
-			// Check for old meta.
-			$old_block   = get_post_meta( $post->ID, 'block',   true );
-			$old_unblock = get_post_meta( $post->ID, 'unblock', true );
-			$meta = ( $old_block ) ? 1 : ( ( $old_unblock ) ? 0 : $meta );
-		}
-
-		// Setup defaults.
-		$defaults = array(
-			'post_id'    => $post->ID,
-			'post_type'  => $post->post_type,
-			'block'      => ( isset( $this->block[ $post->post_type ] ) && $this->block[ $post->post_type ] == 1 ) ? true : false,
-			'block_meta' => $meta, // @todo get_post_meta( $post->ID, '_wpmem_block', true ),
-			'block_type' => ( $post->post_type == 'post' ) ? $this->block['post'] : ( ( $post->post_type == 'page' ) ? $this->block['page'] : 0 ),
-		);
-
-		/**
-		 * Filter the block arguments.
-		 *
-		 * @since 2.9.8
-		 *
-		 * @param array $args     Null.
-		 * @param array $defaults Although you are not filtering the defaults, knowing what they are can assist developing more powerful functions.
-		 */
-		$args = apply_filters( 'wpmem_block_args', '', $defaults );
-
-		// Merge $args with defaults.
-		$args = ( wp_parse_args( $args, $defaults ) );
-
-		if ( is_single() || is_page() ) {
-			switch( $args['block_type'] ) {
-				case 1: // If content is blocked by default.
-					$args['block'] = ( $args['block_meta'] == '0' ) ? false : $args['block'];
-					break;
-				case 0 : // If content is unblocked by default.
-					$args['block'] = ( $args['block_meta'] == '1' ) ? true : $args['block'];
-					break;
+			// Backward compatibility for old block/unblock meta.
+			$meta = get_post_meta( $post->ID, '_wpmem_block', true );
+			if ( ! $meta ) {
+				// Check for old meta.
+				$old_block   = get_post_meta( $post->ID, 'block',   true );
+				$old_unblock = get_post_meta( $post->ID, 'unblock', true );
+				$meta = ( $old_block ) ? 1 : ( ( $old_unblock ) ? 0 : $meta );
 			}
+	
+			// Setup defaults.
+			$defaults = array(
+				'post_id'    => $post->ID,
+				'post_type'  => $post->post_type,
+				'block'      => ( isset( $this->block[ $post->post_type ] ) && $this->block[ $post->post_type ] == 1 ) ? true : false,
+				'block_meta' => $meta, // @todo get_post_meta( $post->ID, '_wpmem_block', true ),
+				'block_type' => ( isset( $this->block[ $post->post_type ] ) ) ? $this->block[ $post->post_type ] : 0,
+			);
+	
+			/**
+			 * Filter the block arguments.
+			 *
+			 * @since 2.9.8
+			 *
+			 * @param array $args     Null.
+			 * @param array $defaults Although you are not filtering the defaults, knowing what they are can assist developing more powerful functions.
+			 */
+			$args = apply_filters( 'wpmem_block_args', '', $defaults );
+	
+			// Merge $args with defaults.
+			$args = ( wp_parse_args( $args, $defaults ) );
+	
+			if ( is_single() || is_page() ) {
+				switch( $args['block_type'] ) {
+					case 1: // If content is blocked by default.
+						$args['block'] = ( $args['block_meta'] == '0' ) ? false : $args['block'];
+						break;
+					case 0 : // If content is unblocked by default.
+						$args['block'] = ( $args['block_meta'] == '1' ) ? true : $args['block'];
+						break;
+				}
+
+			} else {
+				$args['block'] = false;
+			}
+
 		} else {
-
-			$args['block'] = false;
-
+			$args = array( 'block' => false );
 		}
 
 		/**
@@ -308,11 +340,11 @@ class WP_Members {
 	 * This is the primary function that picks up where get_action() leaves off.
 	 * Determines whether content is shown or hidden for both post and pages.
 	 *
-	 * @since 3.0
+	 * @since 3.0.0
 	 *
 	 * @global string $wpmem_themsg      Contains messages to be output.
-	 * @global string $wpmem_captcha_err Contains error message for reCAPTCHA.
-	 * @global object $post              The post object.
+	 * @global object $post              The WordPress Post object.
+	 *
 	 * @param  string $content
 	 * @return string $content
 	 */
@@ -366,7 +398,7 @@ class WP_Members {
 							// Shuts down excerpts on multipage posts if not on first page.
 							$content = '';
 
-					} elseif ( $this->show_excerpt[ $post->post_type ] == 1 ) {
+					} elseif ( isset( $this->show_excerpt[ $post->post_type ] ) && $this->show_excerpt[ $post->post_type ] == 1 ) {
 
 						if ( ! stristr( $content, '<span id="more' ) ) {
 							$content = wpmem_do_excerpt( $content );
@@ -382,9 +414,9 @@ class WP_Members {
 
 					}
 
-					$content = ( $this->show_login[ $post->post_type ] == 1 ) ? $content . wpmem_inc_login() : $content . wpmem_inc_login( 'page', '', 'hide' );
+					$content = ( isset( $this->show_login[ $post->post_type ] ) && $this->show_login[ $post->post_type ] == 1 ) ? $content . wpmem_inc_login() : $content . wpmem_inc_login( 'page', '', 'hide' );
 
-					$content = ( $this->show_reg[ $post->post_type ] == 1 ) ? $content . wpmem_inc_registration() : $content;
+					$content = ( isset( $this->show_reg[ $post->post_type ] ) && $this->show_reg[ $post->post_type ] == 1 ) ? $content . wpmem_inc_registration() : $content;
 				}
 
 			// Protects comments if expiration module is used and user is expired.
@@ -416,14 +448,56 @@ class WP_Members {
 	}
 
 	/**
-	 * Returns the registration fields.
+	 * Sets the registration fields.
 	 *
 	 * @since 3.0.0
-	 *
-	 * @return array The registration fields.
 	 */
 	function load_fields() {
 		$this->fields = get_option( 'wpmembers_fields' );
+	}
+	
+	/**
+	 * Get excluded meta fields.
+	 *
+	 * @since Unknown
+	 *
+	 * @param  string $tag A tag so we know where the function is being used.
+	 * @return array       The excluded fields.
+	 */
+	function excluded_fields( $tag ) {
+
+		// Default excluded fields.
+		$excluded_fields = array( 'password', 'confirm_password', 'confirm_email', 'password_confirm', 'email_confirm' );
+
+		/**
+		 * Filter the fields to be excluded when user is created/updated.
+		 *
+		 * @since 2.9.3
+		 * @since Unknown Moved to new method in WP_Members Class.
+		 *
+		 * @param array       An array of the field meta names to exclude.
+		 * @param string $tag A tag so we know where the function is being used.
+		 */
+		$excluded_fields = apply_filters( 'wpmem_exclude_fields', $excluded_fields, $tag );
+
+		// Return excluded fields.
+		return $excluded_fields;
+	}
+	
+	/**
+	 * Set page locations.
+	 *
+	 * Handles numeric page IDs while maintaining
+	 * compatibility with old full url settings.
+	 *
+	 * @since 3.0.8
+	 */
+	function load_user_pages() {
+		foreach ( $this->user_pages as $key => $val ) {
+			if ( is_numeric( $val ) ) {
+				$this->user_pages[ $key ] = get_page_link( $val );
+			}
+		}
 	}
 
 }

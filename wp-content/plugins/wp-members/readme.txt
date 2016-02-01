@@ -2,8 +2,8 @@
 Contributors: cbutlerjr
 Tags: access, authentication, content, login, member, membership, password, protect, register, registration, restriction, subscriber
 Requires at least: 3.1
-Tested up to: 4.3.1
-Stable tag: 3.0.6
+Tested up to: 4.4.1
+Stable tag: 3.0.9.2
 License: GPLv2
 
 WP-Members&trade; is a free membership management framework for WordPress&reg; that restricts content to registered users.
@@ -12,7 +12,7 @@ WP-Members&trade; is a free membership management framework for WordPress&reg; t
 
 WP-Members&trade; is a membership plugin for WordPress&reg;.  Perfect for newsletters, premium content sites, and more!  The plugin restricts selected WordPress&reg; content to registered site members.  WP-Members&trade; puts the registration process on the site front end so it is inline with your content (and thus your branded theme) instead of the native WP login page.  WP-Members&trade; works with no modifications to your theme, but it is scalable for users that want to customize the look and feel, or want to restrict only some content.  It is a great tool for sites offering premium content to subscribers, and is adaptable to a variety of applications.
 
-[vimeo https://vimeo.com/84961265]
+[youtube http://www.youtube.com/watch?v=x4MEoRLSY_U]
 
 = Features: =
 
@@ -111,7 +111,7 @@ Premium priority support is available at the plugin's site [RocketGeek.com](http
 
 == Upgrade Notice ==
 
-WP-Members 3.0.6 is a functional improvement release with minimal core changes.
+WP-Members 3.0.9 is a feature release, see release notes.
 WP-Members 3.0.0 is a major version release. Please review the changelog: http://rkt.bz/v30
 
 == Screenshots ==
@@ -134,6 +134,49 @@ WP-Members 3.0.0 is a major version release. Please review the changelog: http:/
 
 
 == Changelog ==
+
+= 3.0.9.2 =
+
+* Fixes issue with plugin upgrade to new settings, introduces new upgrade process to WP_Members object class.
+* Fixes issue with new wpmem_member_links_args and wpmem_register_links_args filters where filter was not applied.
+
+= 3.0.9.1 =
+
+* Fixes issue with custom post types when a CPT is exists but is not set in the WP-Members settings.
+
+= 3.0.9 =
+
+* Added Custom Post Type support.
+* Added wpmem_member_links_args and wpmem_register_links_args filters.
+* Added $link parameter to wpmem_forgot_link_str and wpmem_reg_link_str filters (gives just the link as an available parameter).
+* Added new wpmem_sb_reg_link_str and wpmem_sb_forgot_link_str filters (same format as above).
+* Added [email] and [user-profile] shortcodes to the new user registration email.
+* Added label_text key to wpmem_register_form_rows filter.
+* Added new auto excerpt settings, can now be set by post type.
+* Added new auto excerpt features including new wpmem_auto_excerpt_args filter.
+* Added forgot username retrieveal link (included on forgot password reset form).
+* Added wpmem_username_link and wpmem_username_link_str for filtering forgot username retrieval link.
+* Fixed handling of post bulk actions to keep current screen (if one is used).
+* Fixed handling of updates to the user pages in the options tab.
+* Fixed handling of empty post object in is_blocked() function.
+* Improved email functions to eliminate get_user_meta() calls when not needed.
+
+= 3.0.8 =
+
+* Added process for forgotten username retrieval.
+* Removed last remaining instances of extract function.
+* Updated settings for special pages (login|register|user-profile) to store only the numeric primary key ID. This will eliminate the need to update these settings if the site is moved (from a dev to live site, for example).  Legacy full URL settings will still be compatible without needing to be updated, but will be automatically updated when main options are saved.
+
+= 3.0.7 =
+
+* Fix for use of display_name on profile update.
+* Fix for newer installs (post WP 4.0) where WPLANG is not defined and reCAPTCHA is used.
+* Fix in wpmem_form shortcode to skp if no additional tag exists.
+* Fix to plugin_basename.
+* Changes in core to use fields from WP_Members class (preparing for new form field process).
+* Reviews and updates to code standards and inline documentation.
+* Fix for password reset (typo in object name checking for moderated registration)
+* Fix for PayPal extension (http://rkt.bz/r3); added logic to avoid errors if the PayPal extension is disabled but the main option setting remained turned on.
 
 = 3.0.6 =
 

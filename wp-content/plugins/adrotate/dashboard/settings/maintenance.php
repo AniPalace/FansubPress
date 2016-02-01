@@ -67,6 +67,12 @@
 		<td><?php _e('Normal', 'adrotate'); ?>: <?php echo $adrotate_advert_status['normal']; ?>, <?php _e('Error', 'adrotate'); ?>: <?php echo $adrotate_advert_status['error']; ?>, <?php _e('Expired', 'adrotate'); ?>: <?php echo $adrotate_advert_status['expired']; ?>, <?php _e('Expires Soon', 'adrotate'); ?>: <?php echo $adrotate_advert_status['expiressoon']; ?>, <?php _e('Unknown', 'adrotate'); ?>: <?php echo $adrotate_advert_status['unknown']; ?>.</td>
 	</tr>
 	<tr>
+		<td><?php _e('Banners/assets Folder', 'adrotate-pro'); ?></td>
+		<td>
+			<?php echo (is_writable(ABSPATH.'wp-content/banners/')) ? '<span style="color:#009900;">'.__('Exists and appears writable', 'adrotate-pro').'</span>' : '<span style="color:#CC2900;">'.__('Not writable or does not exist', 'adrotate-pro').'</span>'; ?>
+		</td>
+	</tr>
+	<tr>
 		<td><?php _e('Ad evaluation next run:', 'adrotate'); ?></td>
 		<td><?php if(!$adevaluate) _e('Not scheduled!', 'adrotate'); else echo date_i18n(get_option('date_format')." H:i", $adevaluate); ?></td>
 	</tr>

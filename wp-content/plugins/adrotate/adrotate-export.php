@@ -17,47 +17,73 @@
  Return:    -- None --
  Since:		3.11
 -------------------------------------------------------------*/
-function adrotate_export_ads($ids) {
+function adrotate_export_ads($ids, $format) {
 	global $wpdb;
 
-	$all_ads = $wpdb->get_results("SELECT * FROM `".$wpdb->prefix."adrotate` ORDER BY `id` ASC;", ARRAY_A);
+	$all_ads = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}adrotate` ORDER BY `id` ASC;", ARRAY_A);
 
-	$filename = "AdRotate_export_".date_i18n("mdYHi")."_".uniqid().".xml";
-	$fp = fopen(WP_CONTENT_DIR . '/reports/'.$filename, 'r');
-
-	$xml = new SimpleXMLElement('<adverts></adverts>');
-
+	$ads = array();
 	foreach($all_ads as $single) {
 		if(in_array($single['id'], $ids)) {
 			$starttime = $stoptime = 0;
-			$starttime = $wpdb->get_var("SELECT `starttime` FROM `".$wpdb->prefix."adrotate_schedule`, `".$wpdb->prefix."adrotate_linkmeta` WHERE `ad` = '".$single['id']."' AND `schedule` = `".$wpdb->prefix."adrotate_schedule`.`id` ORDER BY `starttime` ASC LIMIT 1;");
-			$stoptime = $wpdb->get_var("SELECT `stoptime` FROM `".$wpdb->prefix."adrotate_schedule`, `".$wpdb->prefix."adrotate_linkmeta` WHERE `ad` = '".$single['id']."' AND  `schedule` = `".$wpdb->prefix."adrotate_schedule`.`id` ORDER BY `stoptime` DESC LIMIT 1;");
+			$starttime = $wpdb->get_var("SELECT `starttime` FROM `{$wpdb->prefix}adrotate_schedule`, `{$wpdb->prefix}adrotate_linkmeta` WHERE `ad` = '".$single['id']."' AND `schedule` = `{$wpdb->prefix}adrotate_schedule`.`id` ORDER BY `starttime` ASC LIMIT 1;");
+			$stoptime = $wpdb->get_var("SELECT `stoptime` FROM `{$wpdb->prefix}adrotate_schedule`, `{$wpdb->prefix}adrotate_linkmeta` WHERE `ad` = '".$single['id']."' AND  `schedule` = `{$wpdb->prefix}adrotate_schedule`.`id` ORDER BY `stoptime` DESC LIMIT 1;");
 
 			if(!is_array($single['cities'])) $single['cities'] = array();
 			if(!is_array($single['countries'])) $single['countries'] = array();
 			
-			$node = $xml->addChild('advert');
-			$node->addChild('title', $single['title']);
-			$node->addChild('bannercode', stripslashes($single['bannercode']));
-			$node->addChild('imagetype', $single['imagetype']);
-			$node->addChild('image', $single['image']);
-			$node->addChild('link', $single['link']);
-			$node->addChild('tracker', $single['tracker']);
-			$node->addChild('responsive', $single['responsive']);
-			$node->addChild('weight', $single['weight']);
-			$node->addChild('budget', $single['budget']);
-			$node->addChild('crate', $single['crate']);
-			$node->addChild('irate', $single['irate']);
-			$node->addChild('cities', implode(',', unserialize($single['cities'])));
-			$node->addChild('countries', implode(',', unserialize($single['countries'])));
-			$node->addChild('start', $starttime);
-			$node->addChild('end', $stoptime);
+			$ads[$single['id']] = array(
+				'title' => $single['title'],
+				'bannercode' => stripslashes($single['bannercode']),
+				'imagetype' => $single['imagetype'],
+				'image' => $single['image'],
+				'tracker' => $single['tracker'],
+				'mobile' => $single['mobile'],
+				'tablet' => $single['tablet'],
+				'responsive' => $single['responsive'],
+				'weight' => $single['weight'],
+				'budget' => $single['budget'],
+				'crate' => $single['crate'],
+				'irate' => $single['irate'],
+				'cities' => implode(',', maybe_unserialize($single['cities'])),
+				'countries' => implode(',', maybe_unserialize($single['countries'])),
+				'start' => $starttime,
+				'end' => $stoptime,
+			);
 		}
 	}
 
-	file_put_contents(WP_CONTENT_DIR . '/reports/'.$filename, $xml->saveXML());
+ 	if($ads) {
+		$filename = "AdRotate_export_".date_i18n("mdYHi")."_".uniqid().".xml";
 
-	adrotate_return('adrotate-ads', 215, array('file' => $filename));
-	exit;
+		$xml = new SimpleXMLElement('<adverts></adverts>');
+		foreach($ads as $ad) {
+			$node = $xml->addChild('advert');
+			$node->addChild('title', $ad['title']);
+			$node->addChild('bannercode', $ad['bannercode']);
+			$node->addChild('imagetype', $ad['imagetype']);
+			$node->addChild('image', $ad['image']);
+			$node->addChild('tracker', $ad['tracker']);
+			$node->addChild('mobile', $ad['mobile']);
+			$node->addChild('tablet', $ad['tablet']);
+			$node->addChild('responsive', $ad['responsive']);
+			$node->addChild('weight', $ad['weight']);
+			$node->addChild('budget', $ad['budget']);
+			$node->addChild('crate', $ad['crate']);
+			$node->addChild('irate', $ad['irate']);
+			$node->addChild('cities', $ad['cities']);
+			$node->addChild('countries', $ad['countries']);
+			$node->addChild('start', $ad['start']);
+			$node->addChild('end', $ad['end']);
+		}
+
+		file_put_contents(WP_CONTENT_DIR . '/reports/'.$filename, $xml->saveXML());
+		unset($all_ads, $ads);
+
+		adrotate_return('adrotate-ads', 215, array('file' => $filename));
+		exit;
+	} else {
+		adrotate_return('adrotate-ads', 509);
+	}
 }
 ?>

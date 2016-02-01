@@ -28,18 +28,27 @@ function adrotate_shortcode($atts, $content = null) {
 	if(!empty($atts['site'])) $site = 0; // Not supported in free version
 
 	$output = '';
-
-	if($adrotate_config['w3caching'] == "Y") $output .= '<!-- mfunc '.W3TC_DYNAMIC_SECURITY.' -->';
-
-	if($banner_id > 0 AND $group_ids == 0) { // Show one Ad
-		$output .= adrotate_ad($banner_id, true, 0, 0);
+	if($adrotate_config['w3caching'] == "Y") {
+		$output .= '<!-- mfunc '.W3TC_DYNAMIC_SECURITY.' -->';
+	
+		if($banner_id > 0 AND ($group_ids == 0 OR $group_ids > 0)) { // Show one Ad
+			$output .= 'echo adrotate_ad('.$banner_id.', true, 0, 0);';
+		}
+	
+		if($banner_id == 0 AND $group_ids > 0) { // Show group
+			$output .= 'echo adrotate_group('.$group_ids.', 0, 0, 0);';
+		}
+	
+		$output .= '<!-- /mfunc '.W3TC_DYNAMIC_SECURITY.' -->';
+	} else {
+		if($banner_id > 0 AND ($group_ids == 0 OR $group_ids > 0)) { // Show one Ad
+			$output .= adrotate_ad($banner_id, true, 0, 0);
+		}
+	
+		if($banner_id == 0 AND $group_ids > 0) { // Show group
+			$output .= adrotate_group($group_ids, 0, 0, 0);
+		}
 	}
-
-	if($banner_id == 0 AND $group_ids > 0) { // Show group 
-		$output .= adrotate_group($group_ids, 0, 0, 0);
-	}
-
-	if($adrotate_config['w3caching'] == "Y") $output .= '<!-- /mfunc -->';
 
 	return $output;
 }
@@ -62,14 +71,14 @@ function adrotate_is_networked() {
 }
 
 /*-------------------------------------------------------------
- Name:      adrotate_is_bot
+ Name:      adrotate_is_human
 
  Purpose:   Check if visitor is a bot
  Receive:   -None-
  Return:    Boolean
  Since:		3.11.10
 -------------------------------------------------------------*/
-function adrotate_is_bot() {
+function adrotate_is_human() {
 	global $adrotate_crawlers;
 
 	if(is_array($adrotate_crawlers)) {
@@ -85,17 +94,56 @@ function adrotate_is_bot() {
 		$useragent = '';
 	}
 
+	$nocrawler = array(true);
 	if(strlen($useragent) > 0) {
-		$nocrawler = true;
-		foreach($crawlers as $crawler) {
-			if(preg_match("/$crawler/i", $useragent)) $nocrawler = false;
+		foreach($crawlers as $key => $crawler) {
+			if(preg_match('/'.$crawler.'/i', $useragent)) $nocrawler[] = false;
 		}
-	} else {
-		$nocrawler = false;
 	}
+	$nocrawler = (!in_array(false, $nocrawler)) ? true : false; // If no bool false in array it's not a bot
 	
 	// Returns true if no bot.
 	return $nocrawler;
+}
+
+/*-------------------------------------------------------------
+ Name:      adrotate_is_mobile
+
+ Purpose:   Check if visitor is on a smartphone
+ Receive:   -None-
+ Return:    Boolean
+ Since:		3.13.2
+-------------------------------------------------------------*/
+function adrotate_is_mobile() {
+	if(!class_exists('Mobile_Detect')) {
+		require_once(WP_CONTENT_DIR.'/plugins/adrotate/library/mobile-detect.php');
+	}
+	$detect = new Mobile_Detect;
+	 
+	if($detect->isMobile() AND !$detect->isTablet()) {
+		return true;
+	}
+	return false;
+}
+
+/*-------------------------------------------------------------
+ Name:      adrotate_is_tablet
+
+ Purpose:   Check if visitor is on a tablet
+ Receive:   -None-
+ Return:    Boolean
+ Since:		3.13.2
+-------------------------------------------------------------*/
+function adrotate_is_tablet() {
+	if(!class_exists('Mobile_Detect')) {
+		require_once(WP_CONTENT_DIR.'/plugins/adrotate/library/mobile-detect.php');
+	}
+	$detect = new Mobile_Detect;
+	 
+	if($detect->isTablet()) {
+		return true;
+	}
+	return false;
 }
 
 /*-------------------------------------------------------------
@@ -121,7 +169,7 @@ function adrotate_count_impression($ad, $group = 0, $blog_id = 0, $impression_ti
 		}
 
 		$saved_timer = $wpdb->get_var($wpdb->prepare("SELECT `timer` FROM `".$wpdb->prefix."adrotate_tracker` WHERE `ipaddress` = '%s' AND `stat` = 'i' AND `bannerid` = %d ORDER BY `timer` DESC LIMIT 1;", $remote_ip, $ad));
-		if($saved_timer < $impression_timer AND adrotate_is_bot()) {
+		if($saved_timer < $impression_timer AND adrotate_is_human()) {
 			$stats = $wpdb->get_var($wpdb->prepare("SELECT `id` FROM `".$wpdb->prefix."adrotate_stats` WHERE `ad` = %d AND `group` = %d AND `thetime` = $today;", $ad, $group));
 			if($stats > 0) {
 				$wpdb->query("UPDATE `".$wpdb->prefix."adrotate_stats` SET `impressions` = `impressions` + 1 WHERE `id` = $stats;");
@@ -129,7 +177,7 @@ function adrotate_count_impression($ad, $group = 0, $blog_id = 0, $impression_ti
 				$wpdb->insert($wpdb->prefix.'adrotate_stats', array('ad' => $ad, 'group' => $group, 'thetime' => $today, 'clicks' => 0, 'impressions' => 1));
 			}
 
-			$wpdb->insert($wpdb->prefix."adrotate_tracker", array('ipaddress' => $remote_ip, 'timer' => $now, 'bannerid' => $ad, 'stat' => 'i', 'useragent' => '', 'country' => '', 'city' => ''));
+			$wpdb->insert($wpdb->prefix."adrotate_tracker", array('ipaddress' => $remote_ip, 'timer' => $now, 'bannerid' => $ad, 'stat' => 'i', 'country' => '', 'city' => ''));
 		}
 	}
 } 
@@ -190,7 +238,7 @@ function adrotate_click_callback() {
 		if(($adrotate_config['enable_loggedin_clicks'] == 'Y' AND is_user_logged_in()) OR !is_user_logged_in()) {	
 			$remote_ip = adrotate_get_remote_ip();
 
-			if(adrotate_is_bot() AND $remote_ip != "unknown" AND !empty($remote_ip)) {
+			if(adrotate_is_human() AND $remote_ip != "unknown" AND !empty($remote_ip)) {
 				$now = adrotate_now();
 				$today = adrotate_date_start('day');
 
@@ -209,7 +257,7 @@ function adrotate_click_callback() {
 						$wpdb->insert($wpdb->prefix.'adrotate_stats', array('ad' => $ad, 'group' => $group, 'thetime' => $today, 'clicks' => 1, 'impressions' => 1));
 					}
 
-					$wpdb->insert($wpdb->prefix.'adrotate_tracker', array('ipaddress' => $remote_ip, 'timer' => $now, 'bannerid' => $ad, 'stat' => 'c', 'useragent' => $useragent, 'country' => '', 'city' => ''));
+					$wpdb->insert($wpdb->prefix.'adrotate_tracker', array('ipaddress' => $remote_ip, 'timer' => $now, 'bannerid' => $ad, 'stat' => 'c', 'country' => '', 'city' => ''));
 				}
 			}
 		}
@@ -526,7 +574,7 @@ function adrotate_evaluate_ad($ad_id) {
 	$in7days = $now + 604800;
 
 	// Fetch ad
-	$ad = $wpdb->get_row($wpdb->prepare("SELECT `id`, `bannercode`, `tracker`, `link`, `imagetype`, `image`, `responsive` FROM `".$wpdb->prefix."adrotate` WHERE `id` = %d;", $ad_id));
+	$ad = $wpdb->get_row($wpdb->prepare("SELECT `id`, `bannercode`, `tracker`, `imagetype`, `image`, `responsive` FROM `".$wpdb->prefix."adrotate` WHERE `id` = %d;", $ad_id));
 	$stoptime = $wpdb->get_var("SELECT `stoptime` FROM `".$wpdb->prefix."adrotate_schedule`, `".$wpdb->prefix."adrotate_linkmeta` WHERE `ad` = '".$ad->id."' AND `schedule` = `".$wpdb->prefix."adrotate_schedule`.`id` ORDER BY `stoptime` DESC LIMIT 1;");
 	$schedules = $wpdb->get_var("SELECT COUNT(`schedule`) FROM `".$wpdb->prefix."adrotate_linkmeta` WHERE `ad` = '".$ad->id."' AND `group` = 0 AND `user` = 0;");
 
@@ -728,10 +776,15 @@ function adrotate_remove_capability($capability){
  Since:		3.6
 -------------------------------------------------------------*/
 function adrotate_dashboard_scripts() {
-	wp_enqueue_script('jquery');
-	wp_enqueue_script('raphael', plugins_url('/library/raphael-min.js', __FILE__), array('jquery'));
-	wp_enqueue_script('elycharts', plugins_url('/library/elycharts.min.js', __FILE__), array('jquery', 'raphael'));
-	wp_enqueue_script('textatcursor', plugins_url('/library/textatcursor.js', __FILE__));
+	$page = (isset($_GET['page'])) ? $_GET['page'] : '';
+    if(strpos($page, 'adrotate') !== false) {
+		wp_enqueue_script('jquery');
+		wp_enqueue_script('raphael', plugins_url('/library/raphael-min.js', __FILE__), array('jquery'));
+		wp_enqueue_script('elycharts', plugins_url('/library/elycharts.min.js', __FILE__), array('jquery', 'raphael'));
+		wp_enqueue_script('textatcursor', plugins_url('/library/textatcursor.js', __FILE__));
+		wp_enqueue_script('tablesorter', plugins_url('/library/jquery.tablesorter.min.js', __FILE__), array('jquery'));
+		wp_enqueue_script('adrotate-tablesorter', plugins_url('/library/jquery.adrotate.tablesorter.js', __FILE__), array('jquery', 'tablesorter'));
+	}
 
 	// WP Pointers
 	$seen_it = explode(',', get_user_meta(get_current_user_id(), 'dismissed_wp_pointers', true));
@@ -739,7 +792,7 @@ function adrotate_dashboard_scripts() {
 		wp_enqueue_script('wp-pointer');
 		wp_enqueue_style('wp-pointer');
 		add_action('admin_print_footer_scripts', 'adrotate_welcome_pointer');
-	}
+    }
 }
 
 /*-------------------------------------------------------------
@@ -751,7 +804,7 @@ function adrotate_dashboard_scripts() {
  Since:		3.6
 -------------------------------------------------------------*/
 function adrotate_dashboard_styles() {
-	wp_enqueue_style( 'adrotate-admin-stylesheet', plugins_url( 'library/dashboard.css', __FILE__ ) );
+	wp_enqueue_style('adrotate-admin-stylesheet', plugins_url('library/dashboard.css', __FILE__));
 }
 
 /*-------------------------------------------------------------
@@ -785,8 +838,17 @@ function adrotate_folder_contents($current) {
 			foreach($files as $file) {
 				$fileinfo = pathinfo($file);
 		
-				if((strtolower($fileinfo['extension']) == "jpg" OR strtolower($fileinfo['extension']) == "gif" OR strtolower($fileinfo['extension']) == "png" 
-				OR strtolower($fileinfo['extension']) == "jpeg" OR strtolower($fileinfo['extension']) == "swf" OR strtolower($fileinfo['extension']) == "flv")) {
+				if(
+					(
+						strtolower($fileinfo['extension']) == "jpg" 
+						OR strtolower($fileinfo['extension']) == "gif" 
+						OR strtolower($fileinfo['extension']) == "png" 
+						OR strtolower($fileinfo['extension']) == "jpeg" 
+						OR strtolower($fileinfo['extension']) == "swf" 
+						OR strtolower($fileinfo['extension']) == "flv" 
+						OR strtolower($fileinfo['extension']) == "html"
+					)
+				) {
 				    $output .= "<option value='".$file."'";
 				    if(($current == $siteurl.'/wp-content/banners/'.$file) OR ($current == $siteurl."/%folder%".$file)) { $output .= "selected"; }
 				    $output .= ">".$file."</option>";

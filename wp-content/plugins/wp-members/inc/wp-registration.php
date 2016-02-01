@@ -8,13 +8,12 @@
  * 
  * This file is part of the WP-Members plugin by Chad Butler
  * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2015 Chad Butler
+ * Copyright (c) 2006-2016 Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
- * @package WordPress
- * @subpackage WP-Members
+ * @package WP-Members
  * @author Chad Butler
- * @copyright 2006-2015
+ * @copyright 2006-2016
  *
  * Functions Included:
  * - wpmem_do_wp_register_form
@@ -55,15 +54,7 @@ function wpmem_do_wp_register_form() {
 						} else { 
 							$tos_pop = "<a href=\"#\" onClick=\"window.open('" . WP_PLUGIN_URL . "/wp-members/wp-members-tos.php','mywindow');\">";
 						}
-						/**
-						 * Filter the TOS link text.
-						 *
-						 * When this filter is used for the WP native registration, the $toggle parameter is not passed.
-						 *
-						 * @since 2.7.5
-						 *
-						 * @param string The text and link for the TOS.
-						 */
+						/** This filter is documented in wp-members/inc/register.php */
 						$tos = apply_filters( 'wpmem_tos_link_txt', sprintf( __( 'Please indicate that you agree to the %s TOS %s', 'wp-members' ), $tos_pop, '</a>' ) );
 					
 					}
@@ -202,4 +193,4 @@ function wpmem_do_wp_newuser_form() {
 	echo '</tbody></table>';
 
 }
-/** End of File **/
+// End of file.

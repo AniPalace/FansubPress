@@ -24,7 +24,7 @@ class adrotate_widgets extends WP_Widget {
 	-------------------------------------------------------------*/
 	function adrotate_widgets() {
 
-        parent::__construct(false, 'AdRotate', array('description' => "Show unlimited ads in the sidebar."));	
+        parent::__construct(false, 'AdRotate', array('description' => "Show a group of adverts or a single advert in any widget area."));	
 
 	}
 
@@ -47,17 +47,27 @@ class adrotate_widgets extends WP_Widget {
 		}
 		
 		if($adrotate_config['widgetalign'] == 'Y') echo '<ul><li>';
-		if($adrotate_config['w3caching'] == 'Y') echo '<!-- mfunc '.W3TC_DYNAMIC_SECURITY.' -->';
-		
-		if($instance['type'] == "single") {
-			echo adrotate_ad($instance['adid'], true, 0, 0, 0);
+
+		if($adrotate_config['w3caching'] == 'Y') {
+			echo '<!-- mfunc '.W3TC_DYNAMIC_SECURITY.' -->';
+			if($instance['type'] == "single") {
+				echo 'echo adrotate_ad('.$instance['adid'].', true, 0, 0, 0);';
+			}
+	
+			if($instance['type'] == "group") {
+				echo 'echo adrotate_group('.$instance['adid'].', 0, 0, 0);';
+			}
+			echo '<!-- /mfunc '.W3TC_DYNAMIC_SECURITY.' -->';
+		} else {
+			if($instance['type'] == "single") {
+				echo adrotate_ad($instance['adid'], true, 0, 0, 0);
+			}
+	
+			if($instance['type'] == "group") {
+				echo adrotate_group($instance['adid'], 0, 0, 0);
+			}
 		}
 
-		if($instance['type'] == "group") {
-			echo adrotate_group($instance['adid'], 0, 0, 0);
-		}
-		
-		if($adrotate_config['w3caching'] == 'Y') echo '<!-- /mfunc -->';
 		if($adrotate_config['widgetalign'] == 'Y') echo '</li></ul>';
 		
 		echo $after_widget;
@@ -100,13 +110,7 @@ class adrotate_widgets extends WP_Widget {
 		$title = esc_attr( $title );
 		$description = esc_attr( $description );
 		$type = esc_attr( $type );
-
-		//Try and preserve pre-fix widget IDs
-		if(isset($id) and $adid < 1) {
-			$adid = esc_attr( $id );
-		} else {
-			$adid = esc_attr( $adid );
-		}
+		$adid = esc_attr( $adid );
 ?>
 		<p>
 			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title (optional):', 'adrotate' ); ?></label>
@@ -123,8 +127,8 @@ class adrotate_widgets extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id('type'); ?>"><?php _e( 'Type:', 'adrotate' ); ?></label>
 			<select class="widefat" id="<?php echo $this->get_field_id('type'); ?>" name="<?php echo $this->get_field_name('type'); ?>" class="postform">
-			    <option value="single" <?php if($type == "single") { echo 'selected'; } ?>><?php _e( 'Single Ad - Use Ad ID', 'adrotate' ); ?></option>
-		        <option value="group" <?php if($type == "group") { echo 'selected'; } ?>><?php _e( 'Group of Ads - Use group ID', 'adrotate' ); ?></option>
+			    <option value="single" <?php if($type == "single") { echo 'selected'; } ?>><?php _e( 'Advert - Use Advert ID', 'adrotate' ); ?></option>
+		        <option value="group" <?php if($type == "group") { echo 'selected'; } ?>><?php _e( 'Group - Use group ID', 'adrotate' ); ?></option>
 			</select>
 			<br />
 			<small><?php _e( 'Choose what you want to use this widget for', 'adrotate' ); ?></small>

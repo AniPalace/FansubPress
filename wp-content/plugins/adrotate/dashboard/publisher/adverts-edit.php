@@ -12,7 +12,7 @@
 if(!$ad_edit_id) {
 	$edit_id = $wpdb->get_var("SELECT `id` FROM `{$wpdb->prefix}adrotate` WHERE `type` = 'empty' ORDER BY `id` DESC LIMIT 1;");
 	if($edit_id == 0) {
-	    $wpdb->insert($wpdb->prefix."adrotate", array('title' => '', 'bannercode' => '', 'thetime' => $now, 'updated' => $now, 'author' => $current_user->user_login, 'imagetype' => 'dropdown', 'image' => '', 'link' => '', 'tracker' => 'N', 'mobile' => 'N', 'tablet' => 'N', 'responsive' => 'N', 'type' => 'empty', 'weight' => 6, 'sortorder' => 0, 'budget' => 0, 'crate' => 0, 'irate' => 0, 'cities' => serialize(array()), 'countries' => serialize(array())));
+	    $wpdb->insert($wpdb->prefix."adrotate", array('title' => '', 'bannercode' => '', 'thetime' => $now, 'updated' => $now, 'author' => $current_user->user_login, 'imagetype' => 'dropdown', 'image' => '', 'tracker' => 'N', 'desktop' => 'Y', 'mobile' => 'Y', 'tablet' => 'Y', 'responsive' => 'N', 'type' => 'empty', 'weight' => 6, 'sortorder' => 0, 'budget' => 0, 'crate' => 0, 'irate' => 0, 'cities' => serialize(array()), 'countries' => serialize(array())));
 	    $edit_id = $wpdb->insert_id;
 
 		$wpdb->insert($wpdb->prefix.'adrotate_schedule', array('name' => 'Schedule for ad '.$edit_id, 'starttime' => $now, 'stoptime' => $in84days, 'maxclicks' => 0, 'maximpressions' => 0, 'spread' => 'N', 'dayimpressions' => 0, 'daystarttime' => '0000', 'daystoptime' => '0000', 'day_mon' => 'Y', 'day_tue' => 'Y', 'day_wed' => 'Y', 'day_thu' => 'Y', 'day_fri' => 'Y', 'day_sat' => 'Y', 'day_sun' => 'Y'));
@@ -102,7 +102,6 @@ if($edit_banner->imagetype == "field") {
 	<input type="hidden" name="adrotate_username" value="<?php echo $userdata->user_login;?>" />
 	<input type="hidden" name="adrotate_id" value="<?php echo $edit_banner->id;?>" />
 	<input type="hidden" name="adrotate_type" value="<?php echo $edit_banner->type;?>" />
-	<input type="hidden" name="adrotate_link" value="<?php echo $edit_banner->link;?>" />
 	<input type="hidden" name="adrotate_schedule" value="<?php echo $schedules->id;?>" />
 
 	<?php if($edit_banner->type == 'empty') { ?>
@@ -298,12 +297,19 @@ if($edit_banner->imagetype == "field") {
 	<table class="widefat" style="margin-top: .5em">
 		<tbody>
       	<tr>
+	        <th width="15%" valign="top"><?php _e('Mobile', 'adrotate'); ?></th>
+	        <td colspan="3">
+	        	<?php _e('Show on;', 'adrotate'); ?>&nbsp;&nbsp;<label for="adrotate_desktop"><input disabled type="checkbox" name="adrotate_desktop" checked="checked" /><?php _e('Computers', 'adrotate'); ?></label>&nbsp;&nbsp;<label for="adrotate_mobile"><input disabled type="checkbox" name="adrotate_mobile" checked="checked" /><?php _e('Smartphones', 'adrotate'); ?></label>&nbsp;&nbsp;<label for="adrotate_tablet"><input disabled type="checkbox" name="adrotate_tablet" checked="checked" /><?php _e('Tablets.', 'adrotate'); ?></label><br />
+	        	<em><?php _e('Also enable mobile support in the group this advert goes in.', 'adrotate'); ?></em>
+	        </td>
+      	</tr>
+      	<tr>
 	        <th width="15%" valign="top"><?php _e('Responsive', 'adrotate'); ?></th>
 	        <td colspan="3">
 	        	<label for="adrotate_responsive"><input tabindex="22" type="checkbox" name="adrotate_responsive" <?php if($edit_banner->responsive == 'Y') { ?>checked="checked" <?php } ?> /> <?php _e('Enable responsive support for this advert.', 'adrotate'); ?></label><br />
-		        <em><?php _e('Upload your images to the banner folder and make sure the filename is in the following format; "imagename.full.ext". A full set of sized images is strongly recommended.', 'adrotate'); ?></em><br />
+		        <em><?php _e('Upload your images to the banner folder and make sure the filename is in the following format; "imagename.full.ext".', 'adrotate'); ?></em><br />
 		        <em><?php _e('For smaller size images use ".320", ".480", ".768" or ".1024" in the filename instead of ".full" for the various viewports.', 'adrotate'); ?></em><br />
-		        <em><strong><?php _e('Example:', 'adrotate'); ?></strong> <?php _e('image.full.jpg, image.320.jpg and image.768.jpg will serve the same advert for different viewports.', 'adrotate'); ?></em></label>
+		        <em><strong><?php _e('Note:', 'adrotate'); ?></strong> <?php _e('This feature will not be developed any further. Consider switching to the Mobile feature in AdRotate Pro as seen above!', 'adrotate'); ?></em></label>
 	        </td>
       	</tr>
        	<tr>
@@ -314,7 +320,7 @@ if($edit_banner->imagetype == "field") {
       	</tr>
 		</tbody>
 	</table>
-	<center><?php _e('With AdRotate Pro you can set a weight to give adverts more or less exposure.', 'adrotate'); ?>  <a href="admin.php?page=adrotate-pro"><?php _e('Upgrade today', 'adrotate'); ?></a>!</center>
+	<center><?php _e('With AdRotate Pro you can easily select which devices the advert should show on!', 'adrotate'); ?>  <a href="admin.php?page=adrotate-pro"><?php _e('Upgrade today', 'adrotate'); ?></a>!</center>
 
 	<h3><?php _e('Geo Targeting in AdRotate Pro', 'adrotate'); ?></h3>
 	<p><em><?php _e('Assign the advert to a group and enable that group to use Geo Targeting.', 'adrotate'); ?></em></p>

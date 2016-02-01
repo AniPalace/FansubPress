@@ -52,11 +52,10 @@ function adrotate_insert_input() {
 		if(isset($_POST['adrotate_maxshown'])) $maxshown = strip_tags(trim($_POST['adrotate_maxshown'], "\t\n "));
 
 		// Advanced options
-		$advertiser = $image_field = $image_dropdown = $link = $tracker = '';
+		$advertiser = $image_field = $image_dropdown = $tracker = '';
 		if(isset($_POST['adrotate_advertiser'])) $advertiser = 0;
 		if(isset($_POST['adrotate_image'])) $image_field = strip_tags(trim($_POST['adrotate_image'], "\t\n "));
 		if(isset($_POST['adrotate_image_dropdown'])) $image_dropdown = strip_tags(trim($_POST['adrotate_image_dropdown'], "\t\n "));
-		if(isset($_POST['adrotate_link'])) $link = strip_tags(trim($_POST['adrotate_link'], "\t\n "));
 		if(isset($_POST['adrotate_tracker'])) $tracker = strip_tags(trim($_POST['adrotate_tracker'], "\t\n "));
 		if(isset($_POST['adrotate_responsive'])) $responsive = strip_tags(trim($_POST['adrotate_responsive'], "\t\n "));
 		
@@ -76,8 +75,6 @@ function adrotate_insert_input() {
 			if(preg_match("/%IMAGE%/", $bannercode)) $bannercode = str_replace('%IMAGE%', '%image%', $bannercode);
 			if(preg_match("/%TITLE%/", $bannercode)) $bannercode = str_replace('%TITLE%', '%title%', $bannercode);
 			if(preg_match("/%RANDOM%/", $bannercode)) $bannercode = str_replace('%RANDOM%', '%random%', $bannercode);
-			// Replace %link% with the actual url (Deprecate $link)
-			if(strlen($link) > 0 AND preg_match("/%link%/i", $bannercode)) $bannercode = str_replace('%link%', $link, $bannercode);
 	
 			// Sort out start dates
 			if(strlen($smonth) > 0 AND !is_numeric($smonth)) 	$smonth 	= date_i18n('m');
@@ -141,19 +138,19 @@ function adrotate_insert_input() {
 	
 			// Save schedule for new ads or update the existing one
 			if($type != 'empty') {
-				$wpdb->query($wpdb->prepare("DELETE FROM `".$wpdb->prefix."adrotate_schedule` WHERE `id` IN (SELECT `schedule` FROM `".$wpdb->prefix."adrotate_linkmeta` WHERE `schedule` != %d AND `schedule` > 0 AND `ad` = %d AND `group` = 0 AND `user` = 0);", $schedule_id, $id)); 
+				$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate_schedule` WHERE `id` IN (SELECT `schedule` FROM `{$wpdb->prefix}adrotate_linkmeta` WHERE `schedule` != %d AND `schedule` > 0 AND `ad` = %d AND `group` = 0 AND `user` = 0);", $schedule_id, $id)); 
 			}
 			$wpdb->update($wpdb->prefix.'adrotate_schedule', array('starttime' => $startdate, 'stoptime' => $enddate, 'maxclicks' => $maxclicks, 'maximpressions' => $maxshown), array('id' => $schedule_id));
 
 			// Save the ad to the DB
-			$wpdb->update($wpdb->prefix.'adrotate', array('title' => $title, 'bannercode' => $bannercode, 'updated' => $thetime, 'author' => $author, 'imagetype' => $imagetype, 'image' => $image, 'link' => $link, 'tracker' => $tracker, 'responsive' => $responsive, 'type' => $active, 'sortorder' => $sortorder), array('id' => $id));
+			$wpdb->update($wpdb->prefix.'adrotate', array('title' => $title, 'bannercode' => $bannercode, 'updated' => $thetime, 'author' => $author, 'imagetype' => $imagetype, 'image' => $image, 'tracker' => $tracker, 'responsive' => $responsive, 'type' => $active, 'sortorder' => $sortorder), array('id' => $id));
 
 			// Determine Responsive requirement
-			$responsive_count = $wpdb->get_var("SELECT COUNT(*) as `total` FROM `".$wpdb->prefix."adrotate` WHERE `responsive` = 'Y';");
+			$responsive_count = $wpdb->get_var("SELECT COUNT(*) as `total` FROM `{$wpdb->prefix}adrotate` WHERE `responsive` = 'Y';");
 			update_option('adrotate_responsive_required', $responsive_count);
 	
 			// Fetch group records for the ad
-			$groupmeta = $wpdb->get_results($wpdb->prepare("SELECT `group` FROM `".$wpdb->prefix."adrotate_linkmeta` WHERE `ad` = %d AND `user` = 0 AND `schedule` = 0;", $id));
+			$groupmeta = $wpdb->get_results($wpdb->prepare("SELECT `group` FROM `{$wpdb->prefix}adrotate_linkmeta` WHERE `ad` = %d AND `user` = 0 AND `schedule` = 0;", $id));
 			foreach($groupmeta as $meta) {
 				$group_array[] = $meta->group;
 			}
@@ -171,7 +168,7 @@ function adrotate_insert_input() {
 			// Remove groups from this ad
 			$delete = array_diff($group_array, $groups);
 			foreach($delete as &$value) {
-				$wpdb->query($wpdb->prepare("DELETE FROM `".$wpdb->prefix."adrotate_linkmeta` WHERE `ad` = %d AND `group` = %d AND `user` = 0 AND `schedule` = 0;", $id, $value)); 
+				$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate_linkmeta` WHERE `ad` = %d AND `group` = %d AND `user` = 0 AND `schedule` = 0;", $id, $value)); 
 			}
 			unset($value);
 	
@@ -282,7 +279,7 @@ function adrotate_insert_group() {
 			if($page_loc != 4) $page_par = 0;
 
 			// Fetch records for the group
-			$linkmeta = $wpdb->get_results($wpdb->prepare("SELECT `ad` FROM `".$wpdb->prefix."adrotate_linkmeta` WHERE `group` = %d AND `user` = 0;", $id));
+			$linkmeta = $wpdb->get_results($wpdb->prepare("SELECT `ad` FROM `{$wpdb->prefix}adrotate_linkmeta` WHERE `group` = %d AND `user` = 0;", $id));
 			foreach($linkmeta as $meta) {
 				$meta_array[] = $meta->ad;
 			}
@@ -300,7 +297,7 @@ function adrotate_insert_group() {
 			// Remove ads from this group
 			$delete = array_diff($meta_array,$ads);
 			foreach($delete as &$value) {
-				$wpdb->query($wpdb->prepare("DELETE FROM `".$wpdb->prefix."adrotate_linkmeta` WHERE `ad` = %d AND `group` = %d AND `user` = 0;", $value, $id)); 
+				$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate_linkmeta` WHERE `ad` = %d AND `group` = %d AND `user` = 0;", $value, $id)); 
 			}
 			unset($value);
 	
@@ -308,7 +305,7 @@ function adrotate_insert_group() {
 			$wpdb->update($wpdb->prefix.'adrotate_groups', array('name' => $name, 'modus' => $modus, 'fallback' => 0, 'sortorder' => $sortorder, 'cat' => $category, 'cat_loc' => $category_loc, 'cat_par' => $category_par, 'page' => $page, 'page_loc' => $page_loc, 'page_par' => $page_par, 'wrapper_before' => $wrapper_before, 'wrapper_after' => $wrapper_after, 'align' => $align, 'gridrows' => $rows, 'gridcolumns' => $columns, 'admargin' => $admargin, 'adwidth' => $adwidth, 'adheight' => $adheight, 'adspeed' => $adspeed), array('id' => $id));
 
 			// Determine Dynamic Library requirement
-			$dynamic_count = $wpdb->get_var("SELECT COUNT(*) as `total` FROM `".$wpdb->prefix."adrotate_groups` WHERE `name` != '' AND `modus` = 1;");
+			$dynamic_count = $wpdb->get_var("SELECT COUNT(*) as `total` FROM `{$wpdb->prefix}adrotate_groups` WHERE `name` != '' AND `modus` = 1;");
 			update_option('adrotate_dynamic_required', $dynamic_count);
 
 			adrotate_return('adrotate-groups', 201);
@@ -365,7 +362,7 @@ function adrotate_request_action() {
 			$return = 'adrotate-ads';
 			if($action == 'export') {
 				if(current_user_can('adrotate_moderate')) {
-					adrotate_export($banner_ids);
+					adrotate_export($banner_ids, $specific);
 					$result_id = 215;
 				} else {
 					adrotate_return($return, 500);
@@ -466,24 +463,24 @@ function adrotate_delete($id, $what) {
 
 	if($id > 0) {
 		if($what == 'banner') {
-			$wpdb->query($wpdb->prepare("DELETE FROM `".$wpdb->prefix."adrotate` WHERE `id` = %d;", $id));
-			$wpdb->query($wpdb->prepare("DELETE FROM `".$wpdb->prefix."adrotate_linkmeta` WHERE `ad` = %d;", $id));
-			$wpdb->query($wpdb->prepare("DELETE FROM `".$wpdb->prefix."adrotate_stats` WHERE `ad` = %d;", $id));
+			$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate` WHERE `id` = %d;", $id));
+			$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate_linkmeta` WHERE `ad` = %d;", $id));
+			$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate_stats` WHERE `ad` = %d;", $id));
 			adrotate_prepare_evaluate_ads(false);
 		} else if ($what == 'group') {
-			$wpdb->query($wpdb->prepare("DELETE FROM `".$wpdb->prefix."adrotate_groups` WHERE `id` = %d;", $id));
-			$wpdb->query($wpdb->prepare("DELETE FROM `".$wpdb->prefix."adrotate_linkmeta` WHERE `group` = %d;", $id));
+			$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate_groups` WHERE `id` = %d;", $id));
+			$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate_linkmeta` WHERE `group` = %d;", $id));
 			adrotate_prepare_evaluate_ads(false);
 		} else if ($what == 'bannergroup') {
-			$linkmeta = $wpdb->get_results($wpdb->prepare("SELECT `ad` FROM `".$wpdb->prefix."adrotate_linkmeta` WHERE `group` = %d;", $id));
+			$linkmeta = $wpdb->get_results($wpdb->prepare("SELECT `ad` FROM `{$wpdb->prefix}adrotate_linkmeta` WHERE `group` = %d;", $id));
 			foreach($linkmeta as $meta) {
-				$wpdb->query("DELETE FROM `".$wpdb->prefix."adrotate` WHERE `id` = ".$meta->ad.";");
-				$wpdb->query("DELETE FROM `".$wpdb->prefix."adrotate_stats` WHERE `ad` = ".$meta->ad.";");
-				$wpdb->query("DELETE FROM `".$wpdb->prefix."adrotate_linkmeta` WHERE `ad` = ".$meta->ad.";");
+				$wpdb->query("DELETE FROM `{$wpdb->prefix}adrotate` WHERE `id` = ".$meta->ad.";");
+				$wpdb->query("DELETE FROM `{$wpdb->prefix}adrotate_stats` WHERE `ad` = ".$meta->ad.";");
+				$wpdb->query("DELETE FROM `{$wpdb->prefix}adrotate_linkmeta` WHERE `ad` = ".$meta->ad.";");
 			}
-			$wpdb->query($wpdb->prepare("DELETE FROM `".$wpdb->prefix."adrotate_groups` WHERE `id` = %d;", $id));
-			$wpdb->query($wpdb->prepare("DELETE FROM `".$wpdb->prefix."adrotate_linkmeta` WHERE `group` = %d;", $id));
-			$wpdb->query($wpdb->prepare("DELETE FROM `".$wpdb->prefix."adrotate_stats` WHERE `group` = %d;", $id)); // Perhaps unnessesary
+			$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate_groups` WHERE `id` = %d;", $id));
+			$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate_linkmeta` WHERE `group` = %d;", $id));
+			$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate_stats` WHERE `group` = %d;", $id)); // Perhaps unnessesary
 			adrotate_prepare_evaluate_ads(false);
 		}
 	}
@@ -526,8 +523,8 @@ function adrotate_reset($id) {
 	global $wpdb;
 
 	if($id > 0) {
-		$wpdb->query($wpdb->prepare("DELETE FROM `".$wpdb->prefix."adrotate_stats` WHERE `ad` = %d", $id));
-		$wpdb->query($wpdb->prepare("DELETE FROM `".$wpdb->prefix."adrotate_tracker` WHERE `bannerid` = %d", $id));
+		$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate_stats` WHERE `ad` = %d", $id));
+		$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate_tracker` WHERE `bannerid` = %d", $id));
 	}
 }
 
@@ -543,9 +540,9 @@ function adrotate_renew($id, $howlong = 2592000) {
 	global $wpdb;
 
 	if($id > 0) {
-		$schedule_id = $wpdb->get_var($wpdb->prepare("SELECT `schedule` FROM `".$wpdb->prefix."adrotate_linkmeta` WHERE `ad` = %d AND `group` = 0 AND `user` = 0 ORDER BY `id` DESC LIMIT 1;", $id)); 
+		$schedule_id = $wpdb->get_var($wpdb->prepare("SELECT `schedule` FROM `{$wpdb->prefix}adrotate_linkmeta` WHERE `ad` = %d AND `group` = 0 AND `user` = 0 ORDER BY `id` DESC LIMIT 1;", $id)); 
 		if($schedule_id > 0) {
-			$wpdb->query("UPDATE `".$wpdb->prefix."adrotate_schedule` SET `stoptime` = `stoptime` + $howlong WHERE `id` = $schedule_id;");
+			$wpdb->query("UPDATE `{$wpdb->prefix}adrotate_schedule` SET `stoptime` = `stoptime` + $howlong WHERE `id` = $schedule_id;");
 		} else {
 			$now = adrotate_now();
 			$stoptime = $now + $howlong;
@@ -563,9 +560,9 @@ function adrotate_renew($id, $howlong = 2592000) {
  Return:    -none-
  Since:		3.8.5
 -------------------------------------------------------------*/
-function adrotate_export($ids) {
+function adrotate_export($ids, $format) {
 	if(is_array($ids)) {
-		adrotate_export_ads($ids);
+		adrotate_export_ads($ids, $format);
 	}
 }
 
@@ -585,10 +582,12 @@ function adrotate_options_submit() {
 		if($settings_tab == 'general') {  
 			$config = get_option('adrotate_config');
 
+			$config['mobile_dynamic_mode'] = (isset($_POST['adrotate_mobile_dynamic_mode'])) ? 'Y' : 'N';
 			$config['jquery'] = (isset($_POST['adrotate_jquery'])) ? 'Y' : 'N';
 			$config['jsfooter'] = (isset($_POST['adrotate_jsfooter'])) ? 'Y' : 'N';
 
 			// Turn options off. Available in AdRotate Pro only
+			$config['textwidget_shortcodes'] = "N";
 			$config['banner_folder'] = "wp-content/banners/";
 			$config['notification_email'] = array();
 			$config['advertiser_email'] = array();

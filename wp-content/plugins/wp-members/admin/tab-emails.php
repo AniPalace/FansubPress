@@ -6,13 +6,12 @@
  * 
  * This file is part of the WP-Members plugin by Chad Butler
  * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2015  Chad Butler
+ * Copyright (c) 2006-2016  Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
- * @package WordPress
- * @subpackage WP-Members
+ * @package WP-Members
  * @author Chad Butler
- * @copyright 2006-2015
+ * @copyright 2006-2016
  *
  * Functions included:
  * - wpmem_a_build_emails
@@ -42,6 +41,10 @@ function wpmem_a_build_emails() {
 	array_push( 
 		$wpmem_email_title_arr,
 		array( __( "Password Reset", 'wp-members' ), 'wpmembers_email_repass' )
+	);
+	array_push(
+		$wpmem_email_title_arr,
+		array( __( "Retrieve Username", 'wp-members' ), 'wpmembers_email_getuser' )
 	);
 	if ( $wpmem->notify == 1 ) {
 		array_push(
@@ -147,6 +150,7 @@ function wpmem_update_emails() {
 	// Update the various emails being used.
 	( $wpmem->mod_reg == 0 ) ? $arr = array( 'wpmembers_email_newreg' ) : $arr = array( 'wpmembers_email_newmod', 'wpmembers_email_appmod' );
 	array_push( $arr, 'wpmembers_email_repass' );
+	array_push( $arr, 'wpmembers_email_getuser' );
 	( $wpmem->notify == 1 ) ? array_push( $arr, 'wpmembers_email_notify' ) : false;
 	array_push(	$arr, 'wpmembers_email_footer' );
 
@@ -166,4 +170,4 @@ function wpmem_update_emails() {
 
 }
 
-/** End of File **/
+// End of file.

@@ -29,3 +29,6 @@
 .inside { padding:6px 10px 12px; clear:both; }
 .pro-image { padding:0px 3px 0px 0px; }
 .adrotate-photo { border-radius: 5px; }
+
+/* Tablesorter */
+table.tablesorter thead tr .header { text-decoration: underline; cursor: pointer; }

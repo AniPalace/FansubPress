@@ -6,13 +6,13 @@
  * 
  * This file is part of the WP-Members plugin by Chad Butler
  * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2015 Chad Butler
+ * Copyright (c) 2006-2016 Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
- * @package WordPress
- * @subpackage WP-Members
+ * @package WP-Members
+ * @subpackage WP-Members Registration Functions
  * @author Chad Butler
- * @copyright 2006-2015
+ * @copyright 2006-2016
  *
  * Functions Included:
  * - wpmem_registration
@@ -333,7 +333,7 @@ function wpmem_registration( $toggle ) {
 
 		// Notify admin of new reg, if needed.
 		if ( $wpmem->notify == 1 ) { 
-			wpmem_notify_admin( $fields['ID'], $wpmem_fields );
+			wpmem_notify_admin( $fields['ID'], $wpmem_fields, $fields );
 		}
 
 		/**
@@ -379,14 +379,7 @@ function wpmem_registration( $toggle ) {
 		// Add the user_ID to the fields array.
 		$fields['ID'] = $user_ID;
 		
-		/**
-		 * Filter registration data after validation before data insertion.
-		 *
-		 * @since 2.8.2
-		 *
-		 * @param array  $fields An array of the registration field data.
-		 * @param string $toggle A switch to indicate the action (new|edit).
-		 */
+		/** This filter is documented in register.php */
 		$fields = apply_filters( 'wpmem_register_data', $fields, 'edit' ); 
 		
 		/**
@@ -521,4 +514,4 @@ function wpmem_get_captcha_err( $wpmem_captcha_err ) {
 }
 endif;
 
-/** End of File **/
+// End of file.

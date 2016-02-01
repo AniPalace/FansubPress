@@ -21,7 +21,7 @@
 		        <option value="deactivate"><?php _e('Deactivate', 'adrotate'); ?></option>
 		        <option value="delete"><?php _e('Delete', 'adrotate'); ?></option>
 		        <option value="reset"><?php _e('Reset stats', 'adrotate'); ?></option>
-		        <option value="export"><?php _e('Export to XML', 'adrotate'); ?></option>
+		        <option value="export-xml"><?php _e('Export to XML', 'adrotate'); ?></option>
 		        <option value="" disabled><?php _e('-- Renew --', 'adrotate'); ?></option>
 		        <option value="renew-31536000"><?php _e('For 1 year', 'adrotate'); ?></option>
 		        <option value="renew-5184000"><?php _e('For 180 days', 'adrotate'); ?></option>
@@ -32,7 +32,7 @@
 		<br class="clear" />
 	</div>
 
-	<table class="widefat" style="margin-top: .5em">
+	<table class="widefat tablesorter manage-ads-main" style="margin-top: .5em">
 		<thead>
 		<tr>
 			<td scope="col" class="manage-column column-cb check-column"><input type="checkbox" /></td>

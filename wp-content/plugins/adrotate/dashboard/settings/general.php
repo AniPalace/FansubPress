@@ -13,16 +13,24 @@
 <span class="description"><?php _e('General settings for AdRotate.', 'adrotate'); ?> <?php _e('Some options are only available in AdRotate Pro!', 'adrotate'); ?></span>
 <table class="form-table">			
 	<tr>
-		<th valign="top"><?php _e('Text widgets', 'adrotate'); ?></th>
-		<td><label for="adrotate_textwidget_shortcodes"><input type="checkbox" name="adrotate_textwidget_shortcodes" disabled /><?php _e('Enable if your theme does not support shortcodes in the WordPress text widget.', 'adrotate'); ?></label></td>
+		<th valign="top"><?php _e('Shortcode in widgets', 'adrotate'); ?></th>
+		<td><label for="adrotate_textwidget_shortcodes"><input type="checkbox" name="adrotate_textwidget_shortcodes" disabled /><?php _e('Enable this option to if your theme does not support shortcodes in the WordPress text widget.', 'adrotate'); ?></label></td>
+	</tr>
+	<tr>
+		<th valign="top"><?php _e('Disable live preview', 'adrotate'); ?></th>
+		<td><label for="adrotate_live_preview"><input type="checkbox" name="adrotate_live_preview" disabled checked /><?php _e('Enable this option if you have faulty adverts that overflow their designated area while creating/editing adverts.', 'adrotate'); ?></label></td>
+	</tr>
+	<tr>
+		<th valign="top"><?php _e('Disable dynamic mode', 'adrotate-pro'); ?></th>
+		<td><label for="adrotate_mobile_dynamic_mode"><input type="checkbox" name="adrotate_mobile_dynamic_mode" <?php if($adrotate_config['mobile_dynamic_mode'] == 'Y') { ?>checked="checked" <?php } ?> /><?php _e('Enable this option to disable dynamic mode in groups for mobile devices if you notice skipping or jumpy content.', 'adrotate'); ?></label></td>
 	</tr>
 	<tr>
 		<th valign="top"><?php _e('Load jQuery', 'adrotate'); ?></th>
-		<td><label for="adrotate_jquery"><input type="checkbox" name="adrotate_jquery" <?php if($adrotate_config['jquery'] == 'Y') { ?>checked="checked" <?php } ?> /><?php _e('Enable if your theme does not load jQuery. jQuery is required for dynamic groups, statistics and some other features.', 'adrotate'); ?></label></td>
+		<td><label for="adrotate_jquery"><input type="checkbox" name="adrotate_jquery" <?php if($adrotate_config['jquery'] == 'Y') { ?>checked="checked" <?php } ?> /><?php _e('Enable this option if your theme does not load jQuery. jQuery is required for dynamic groups, statistics and some other features.', 'adrotate'); ?></label></td>
 	</tr>
 	<tr>
 		<th valign="top"><?php _e('Load scripts in footer?', 'adrotate'); ?></th>
-		<td><label for="adrotate_jsfooter"><input type="checkbox" name="adrotate_jsfooter" <?php if($adrotate_config['jsfooter'] == 'Y') { ?>checked="checked" <?php } ?> /><?php _e('Enable if you want to load all AdRotate Javascripts in the footer of your site.', 'adrotate'); ?></label></td>
+		<td><label for="adrotate_jsfooter"><input type="checkbox" name="adrotate_jsfooter" <?php if($adrotate_config['jsfooter'] == 'Y') { ?>checked="checked" <?php } ?> /><?php _e('Enable this option if you want to load all AdRotate Javascripts in the footer of your site.', 'adrotate'); ?></label></td>
 	</tr>
 	<tr>
 		<th valign="top"><?php _e('Adblock disguise', 'adrotate'); ?></th>
